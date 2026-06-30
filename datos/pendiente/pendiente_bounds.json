@@ -1,21 +1,23 @@
 {
   "bounds": [
     [
-      37.79731367039729,
+      37.79732477640541,
       -1.5950054012847452
     ],
     [
-      40.819216774744795,
-      0.7800451572381555
+      40.81921677474479,
+      0.780043703964729
     ]
   ],
-  "origen": "Pendiente Comunitat Valenciana en bruto, sin recorte a terreno forestal",
-  "correccion": "Raster reproyectado a EPSG:4326 antes de generar el PNG para ajustar correctamente en Leaflet",
+  "origen": "Pendiente Comunitat Valenciana corregida para Leaflet",
+  "correccion": "PNG generado en EPSG:3857 / Web Mercator",
+  "bounds_en": "EPSG:4326",
   "crs_original": "EPSG:25830",
-  "crs_png": "EPSG:4326",
+  "crs_png": "EPSG:3857",
   "raster_original": "2018_CVAL_0500_slope_colour(2).tif",
   "png_generado": {
-    "width": 3536,
-    "height": 4500
-  }
+    "width": 1337,
+    "height": 2200
+  },
+  "nota": "Usar con L.imageOverlay(url, bounds). La imagen está en Web Mercator para coincidir con Leaflet."
 }

@@ -1,7 +1,7 @@
 {
   "titulo": "Pendiente media del terreno",
   "ambito": "Comunitat Valenciana",
-  "tratamiento": "Capa en bruto, sin recorte a terreno forestal",
+  "tratamiento": "Capa en bruto corregida para Leaflet",
   "clases": [
     {
       "nombre": "≤ 25 % · transparente",
