@@ -1,4 +1,14 @@
 {
-  "descripcion": "NDMI de la Comunitat Valenciana",
-  "nota": "La rampa de color está embebida en la imagen raster. En general, tonos más cálidos indican valores más bajos (más seco) y tonos más fríos/verdosos valores más altos (más húmedo)."
+  "titulo": "NDMI Comunitat Valenciana",
+  "tratamiento": "Reproyectado a EPSG:3857 para ajuste correcto en Leaflet",
+  "interpretacion": [
+    {
+      "texto": "Tonos cálidos",
+      "significado": "menor humedad / más seco"
+    },
+    {
+      "texto": "Tonos fríos o azulados",
+      "significado": "mayor humedad / más húmedo"
+    }
+  ]
 }

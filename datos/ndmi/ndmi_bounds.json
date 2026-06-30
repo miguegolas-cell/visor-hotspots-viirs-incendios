@@ -1,12 +1,21 @@
 {
   "bounds": [
     [
-      37.84297521933402,
+      37.84213506535281,
       -1.5298681640625
     ],
     [
-      40.7902543016544,
-      0.6891284179687505
+      40.79025430165441,
+      0.6881954004775751
     ]
-  ]
+  ],
+  "origen": "NDMI Comunitat Valenciana corregido para Leaflet",
+  "imagen_proyectada_en": "EPSG:3857",
+  "bounds_en": "EPSG:4326",
+  "raster_original": "2026-06-23-00_00_2026-06-23-23_59_Sentinel-2_L2A_Moisture_index.tiff",
+  "png_generado": {
+    "width": 689,
+    "height": 1184
+  },
+  "nota": "El PNG está reproyectado a Web Mercator para evitar desplazamientos en Leaflet."
 }
