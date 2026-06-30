@@ -1,0 +1,46 @@
+name: Actualizar hotspots VIIRS
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actualizar-hotspots-viirs
+  cancel-in-progress: true
+
+env:
+  VIIRS_URL_24H: "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/shapes/zips/SUOMI_VIIRS_C2_Europe_24h.zip"
+  VIIRS_URL_48H: "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/shapes/zips/SUOMI_VIIRS_C2_Europe_48h.zip"
+  VIIRS_URL_7D: "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/shapes/zips/SUOMI_VIIRS_C2_Europe_7d.zip"
+  VALENCIA_BBOX: "-1.70,38.60,0.05,40.25"
+
+jobs:
+  actualizar-hotspots:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyshp
+
+      - name: Descargar hotspots VIIRS y generar GeoJSON
+        run: python scripts/actualizar_hotspots_viirs.py
+
+      - name: Guardar cambios
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add datos/hotspots
+          git commit -m "Actualizar hotspots VIIRS 24-48-72h-7d" || echo "Sin cambios"
+          git push
