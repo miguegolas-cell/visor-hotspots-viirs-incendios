@@ -78,7 +78,7 @@ def write_geojson(path, features):
 
 def write_json(path, data):
     path.write_text(
-        json.dumps(data, ensure_ascii=False, indent=2),
+        json.dumps(data, ensure_ascii=False, indent=2, default=str),
         encoding="utf-8"
     )
 
