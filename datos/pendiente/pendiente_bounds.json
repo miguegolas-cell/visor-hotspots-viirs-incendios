@@ -1,0 +1,24 @@
+{
+  "bounds": [
+    [
+      37.797336659975464,
+      -1.5950054012847452
+    ],
+    [
+      40.819216774744795,
+      0.7800631156692305
+    ]
+  ],
+  "bbox": {
+    "lon_min": -1.5950054012847452,
+    "lat_min": 37.797336659975464,
+    "lon_max": 0.7800631156692305,
+    "lat_max": 40.819216774744795
+  },
+  "crs_original": "EPSG:25830",
+  "descripcion": "Pendiente media del terreno en la Comunitat Valenciana. Rangos normativos: <=25% transparente, >25-30% amarillo, >30-50% naranja, >50% rojo.",
+  "raster_origen": "2018_CVAL_0500_slope_colour(1).tif",
+  "png_width": 2664,
+  "png_height": 4500,
+  "alpha": "La clase <=25% y el nodata se representan como transparente."
+}

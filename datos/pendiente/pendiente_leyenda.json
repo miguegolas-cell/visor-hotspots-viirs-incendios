@@ -1,0 +1,25 @@
+{
+  "titulo": "Pendiente media del terreno (%)",
+  "clases": [
+    {
+      "rango": "<= 25 %",
+      "descripcion": "Transparente",
+      "color": "rgba(255,255,255,0)"
+    },
+    {
+      "rango": "> 25 % y <= 30 %",
+      "descripcion": "Amarillo",
+      "color": "#ffff00"
+    },
+    {
+      "rango": "> 30 % y <= 50 %",
+      "descripcion": "Naranja",
+      "color": "#ff8500"
+    },
+    {
+      "rango": "> 50 %",
+      "descripcion": "Rojo",
+      "color": "#910000"
+    }
+  ]
+}
