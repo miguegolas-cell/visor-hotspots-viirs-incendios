@@ -1,0 +1,155 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "LATITUDE": 39.99527,
+        "LONGITUDE": 0.02817,
+        "BRIGHT_TI4": 304.59,
+        "SCAN": 0.46,
+        "TRACK": 0.47,
+        "ACQ_DATE": "2026-06-24",
+        "ACQ_TIME": "0132",
+        "SATELLITE": "N",
+        "CONFIDENCE": "nominal",
+        "VERSION": "2.0NRT",
+        "BRIGHT_TI5": 292.88,
+        "FRP": 1.65,
+        "DAYNIGHT": "N",
+        "metvlc_fuente": "NASA FIRMS · SUOMI-NPP VIIRS C2",
+        "metvlc_periodo_origen": "7d",
+        "metvlc_satellite": "N",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": "2026-06-24T01:32:00+00:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.02817,
+          39.99527
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LATITUDE": 39.56245,
+        "LONGITUDE": -0.30686,
+        "BRIGHT_TI4": 334.92,
+        "SCAN": 0.38,
+        "TRACK": 0.59,
+        "ACQ_DATE": "2026-06-26",
+        "ACQ_TIME": "1219",
+        "SATELLITE": "N",
+        "CONFIDENCE": "nominal",
+        "VERSION": "2.0NRT",
+        "BRIGHT_TI5": 299.55,
+        "FRP": 4.36,
+        "DAYNIGHT": "D",
+        "metvlc_fuente": "NASA FIRMS · SUOMI-NPP VIIRS C2",
+        "metvlc_periodo_origen": "7d",
+        "metvlc_satellite": "N",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": "2026-06-26T12:19:00+00:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.30686,
+          39.56245
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LATITUDE": 39.66316,
+        "LONGITUDE": -0.24886,
+        "BRIGHT_TI4": 307.01,
+        "SCAN": 0.4,
+        "TRACK": 0.37,
+        "ACQ_DATE": "2026-06-28",
+        "ACQ_TIME": "0158",
+        "SATELLITE": "N",
+        "CONFIDENCE": "nominal",
+        "VERSION": "2.0NRT",
+        "BRIGHT_TI5": 295.75,
+        "FRP": 0.87,
+        "DAYNIGHT": "N",
+        "metvlc_fuente": "NASA FIRMS · SUOMI-NPP VIIRS C2",
+        "metvlc_periodo_origen": "7d",
+        "metvlc_satellite": "N",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": "2026-06-28T01:58:00+00:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.24886,
+          39.66316
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LATITUDE": 39.95136,
+        "LONGITUDE": -0.00821,
+        "BRIGHT_TI4": 306.07,
+        "SCAN": 0.34,
+        "TRACK": 0.56,
+        "ACQ_DATE": "2026-06-30",
+        "ACQ_TIME": "0120",
+        "SATELLITE": "N",
+        "CONFIDENCE": "nominal",
+        "VERSION": "2.0NRT",
+        "BRIGHT_TI5": 293.25,
+        "FRP": 0.85,
+        "DAYNIGHT": "N",
+        "metvlc_fuente": "NASA FIRMS · SUOMI-NPP VIIRS C2",
+        "metvlc_periodo_origen": "7d",
+        "metvlc_satellite": "N",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": "2026-06-30T01:20:00+00:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.00821,
+          39.95136
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LATITUDE": 39.95111,
+        "LONGITUDE": -0.00412,
+        "BRIGHT_TI4": 304.73,
+        "SCAN": 0.34,
+        "TRACK": 0.56,
+        "ACQ_DATE": "2026-06-30",
+        "ACQ_TIME": "0120",
+        "SATELLITE": "N",
+        "CONFIDENCE": "nominal",
+        "VERSION": "2.0NRT",
+        "BRIGHT_TI5": 293.23,
+        "FRP": 0.85,
+        "DAYNIGHT": "N",
+        "metvlc_fuente": "NASA FIRMS · SUOMI-NPP VIIRS C2",
+        "metvlc_periodo_origen": "7d",
+        "metvlc_satellite": "N",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": "2026-06-30T01:20:00+00:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.00412,
+          39.95111
+        ]
+      }
+    }
+  ]
+}

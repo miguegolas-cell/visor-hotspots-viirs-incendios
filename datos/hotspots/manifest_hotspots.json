@@ -1,0 +1,24 @@
+{
+  "producto": "Puntos calientes NASA FIRMS · SUOMI-NPP VIIRS C2",
+  "fuente_24h": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/shapes/zips/SUOMI_VIIRS_C2_Europe_24h.zip",
+  "fuente_48h": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/shapes/zips/SUOMI_VIIRS_C2_Europe_48h.zip",
+  "fuente_7d": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/shapes/zips/SUOMI_VIIRS_C2_Europe_7d.zip",
+  "actualizado_utc": "2026-06-30T11:18:02+00:00",
+  "bbox_valencia": {
+    "lon_min": -1.7,
+    "lat_min": 38.6,
+    "lon_max": 0.05,
+    "lat_max": 40.25
+  },
+  "hotspots_24h": 2,
+  "hotspots_48h": 3,
+  "hotspots_72h": 3,
+  "hotspots_7d": 5,
+  "archivos": [
+    "hotspots_24h.geojson",
+    "hotspots_48h.geojson",
+    "hotspots_72h.geojson",
+    "hotspots_7d.geojson"
+  ],
+  "nota": "Los ZIP de FIRMS contienen shapefiles de puntos calientes VIIRS. Este visor filtra la zona de la provincia de Valencia mediante BBOX."
+}
