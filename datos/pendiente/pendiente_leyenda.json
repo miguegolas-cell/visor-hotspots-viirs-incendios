@@ -1,24 +1,22 @@
 {
-  "titulo": "Pendiente media del terreno (%)",
+  "titulo": "Pendiente media del terreno",
+  "ambito": "Comunitat Valenciana",
+  "tratamiento": "Capa en bruto, sin recorte a terreno forestal",
   "clases": [
     {
-      "rango": "<= 25 %",
-      "descripcion": "Transparente",
-      "color": "rgba(255,255,255,0)"
+      "nombre": "≤ 25 % · transparente",
+      "color": "transparent"
     },
     {
-      "rango": "> 25 % y <= 30 %",
-      "descripcion": "Amarillo",
+      "nombre": "> 25 % y ≤ 30 %",
       "color": "#ffff00"
     },
     {
-      "rango": "> 30 % y <= 50 %",
-      "descripcion": "Naranja",
+      "nombre": "> 30 % y ≤ 50 %",
       "color": "#ff8500"
     },
     {
-      "rango": "> 50 %",
-      "descripcion": "Rojo",
+      "nombre": "> 50 %",
       "color": "#910000"
     }
   ]
