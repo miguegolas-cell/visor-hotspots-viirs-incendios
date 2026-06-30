@@ -1,0 +1,21 @@
+{
+  "bounds": [
+    [
+      37.815758868858026,
+      -1.566798229821194
+    ],
+    [
+      40.82737479390208,
+      0.5462321909082989
+    ]
+  ],
+  "bbox": {
+    "lon_min": -1.566798229821194,
+    "lat_min": 37.815758868858026,
+    "lon_max": 0.5462321909082989,
+    "lat_max": 40.82737479390208
+  },
+  "crs_original": "EPSG:25830",
+  "fuente": "MC_CV_ras · PATFOR terreno forestal",
+  "nota": "Imagen PNG categorizada por grupos operativos de combustible y enmascarada al terreno forestal PATFOR."
+}

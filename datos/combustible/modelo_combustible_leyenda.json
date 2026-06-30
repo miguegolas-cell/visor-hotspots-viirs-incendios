@@ -1,0 +1,113 @@
+{
+  "titulo": "Modelo de combustible agrupado",
+  "ambito": "Comunitat Valenciana · terreno forestal PATFOR",
+  "descripcion": "Leyenda operativa simplificada según agrupación solicitada.",
+  "grupos": [
+    {
+      "nombre": "Pasto",
+      "items": [
+        {
+          "nombre": "GR2 · Pasto",
+          "modelo": "GR2",
+          "color": "#d6e571"
+        },
+        {
+          "nombre": "GR4 · Pasto",
+          "modelo": "GR4",
+          "color": "#d6e571"
+        },
+        {
+          "nombre": "Tierras arables SIGPAC · asimiladas a GR2",
+          "modelo": "GR2",
+          "color": "#d6e571"
+        }
+      ]
+    },
+    {
+      "nombre": "Cañas",
+      "items": [
+        {
+          "nombre": "GR7 · Carrizal / marjal",
+          "modelo": "GR7",
+          "color": "#26a69a"
+        },
+        {
+          "nombre": "GR8 · Cañaveral",
+          "modelo": "GR8",
+          "color": "#26a69a"
+        }
+      ]
+    },
+    {
+      "nombre": "Matorral",
+      "items": [
+        {
+          "nombre": "SH1 · Matorral disperso",
+          "modelo": "SH1",
+          "color": "#f57c00"
+        },
+        {
+          "nombre": "SH3 · Matorral medio",
+          "modelo": "SH3",
+          "color": "#f57c00"
+        },
+        {
+          "nombre": "SH4 · Matorral continuo",
+          "modelo": "SH4",
+          "color": "#f57c00"
+        },
+        {
+          "nombre": "SH5 · Matorral con carga",
+          "modelo": "SH5",
+          "color": "#f57c00"
+        },
+        {
+          "nombre": "SH9 · Matorral denso",
+          "modelo": "SH9",
+          "color": "#f57c00"
+        }
+      ]
+    },
+    {
+      "nombre": "Matorral y arbolado",
+      "items": [
+        {
+          "nombre": "TU1 · Arbolado con combustible bajo",
+          "modelo": "TU1",
+          "color": "#2e7d32"
+        },
+        {
+          "nombre": "TU2 · Arbolado con matorral bajo",
+          "modelo": "TU2",
+          "color": "#2e7d32"
+        },
+        {
+          "nombre": "TU3 · Arbolado con matorral alto",
+          "modelo": "TU3",
+          "color": "#2e7d32"
+        },
+        {
+          "nombre": "TU5 · Arbolado con matorral alto umbría",
+          "modelo": "TU5",
+          "color": "#2e7d32"
+        }
+      ]
+    },
+    {
+      "nombre": "Restos vegetales",
+      "items": [
+        {
+          "nombre": "SB3 · Restos vegetales",
+          "modelo": "SB3",
+          "color": "#795548"
+        }
+      ]
+    }
+  ],
+  "clases_no_representadas": [
+    "NB1 urbano/infraestructuras",
+    "NB3 agrícola/arrozal",
+    "NB8 agua",
+    "NB9 suelo desnudo"
+  ]
+}
