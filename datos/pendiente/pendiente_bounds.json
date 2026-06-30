@@ -1,19 +1,21 @@
 {
   "bounds": [
     [
-      37.797336659975464,
+      37.79731367039729,
       -1.5950054012847452
     ],
     [
       40.819216774744795,
-      0.7800631156692305
+      0.7800451572381555
     ]
   ],
   "origen": "Pendiente Comunitat Valenciana en bruto, sin recorte a terreno forestal",
+  "correccion": "Raster reproyectado a EPSG:4326 antes de generar el PNG para ajustar correctamente en Leaflet",
   "crs_original": "EPSG:25830",
+  "crs_png": "EPSG:4326",
   "raster_original": "2018_CVAL_0500_slope_colour(2).tif",
   "png_generado": {
-    "width": 1894,
-    "height": 3200
+    "width": 3536,
+    "height": 4500
   }
 }
