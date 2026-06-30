@@ -91,7 +91,7 @@ body {
   border-color: #0b4f75;
 }
 
-.info-rayos {
+.info-hotspots {
   margin-left: auto;
   font-size: 14px;
   color: #425867;
@@ -177,6 +177,14 @@ body {
   flex-shrink: 0;
 }
 
+.legend-line {
+  width: 20px;
+  height: 0;
+  border-top: 3px solid #174d6d;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
 .legend details {
   margin-top: 4px;
 }
@@ -192,7 +200,6 @@ body {
   margin: 8px 0;
 }
 
-/* Evita que los controles de Leaflet queden demasiado pegados */
 .leaflet-top.leaflet-right {
   margin-top: 8px;
 }
@@ -222,7 +229,7 @@ body {
     align-items: flex-start;
   }
 
-  .info-rayos {
+  .info-hotspots {
     margin-left: 0;
     width: 100%;
   }
