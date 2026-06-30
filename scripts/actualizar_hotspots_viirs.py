@@ -2,9 +2,12 @@ import json
 import os
 import zipfile
 import tempfile
+import time
+import socket
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
 from urllib.request import Request, urlopen
+from urllib.error import URLError, HTTPError
 
 import shapefile
 
