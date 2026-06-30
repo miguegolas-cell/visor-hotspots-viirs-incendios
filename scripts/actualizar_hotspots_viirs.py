@@ -87,22 +87,75 @@ def normalizar_clave(clave):
     return str(clave).strip().lower()
 
 
-def descargar_zip(url, destino):
+def forzar_ipv4():
+    """
+    GitHub Actions a veces intenta conectar por IPv6 y puede dar:
+    OSError: [Errno 101] Network is unreachable
+
+    Con esto obligamos a urllib a usar solo direcciones IPv4.
+    """
+
+    original_getaddrinfo = socket.getaddrinfo
+
+    def getaddrinfo_ipv4(host, port, family=0, type=0, proto=0, flags=0):
+        return original_getaddrinfo(
+            host,
+            port,
+            socket.AF_INET,
+            type,
+            proto,
+            flags
+        )
+
+    socket.getaddrinfo = getaddrinfo_ipv4
+
+
+def descargar_zip(url, destino, intentos=5):
     print(f"Descargando: {url}")
 
-    req = Request(
-        url,
-        headers={
-            "User-Agent": "Mozilla/5.0 MetVlc GitHub Action"
-        }
+    forzar_ipv4()
+
+    ultimo_error = None
+
+    for intento in range(1, intentos + 1):
+        try:
+            print(f"Intento {intento}/{intentos}")
+
+            req = Request(
+                url,
+                headers={
+                    "User-Agent": "Mozilla/5.0 MetVlc GitHub Action",
+                    "Accept": "application/zip,application/octet-stream,*/*",
+                    "Connection": "close"
+                }
+            )
+
+            with urlopen(req, timeout=240) as response:
+                content = response.read()
+
+            if not content or len(content) < 1000:
+                raise RuntimeError(
+                    f"Descarga demasiado pequeña o vacía: {len(content)} bytes"
+                )
+
+            destino.write_bytes(content)
+
+            print(f"Descargado: {destino.name} · {len(content) / 1024:.1f} KB")
+            return
+
+        except (URLError, HTTPError, OSError, TimeoutError, RuntimeError) as e:
+            ultimo_error = e
+            print(f"Error descargando {url}: {e}")
+
+            if intento < intentos:
+                espera = intento * 20
+                print(f"Reintentando en {espera} segundos...")
+                time.sleep(espera)
+
+    raise RuntimeError(
+        f"No se pudo descargar {url} después de {intentos} intentos. "
+        f"Último error: {ultimo_error}"
     )
-
-    with urlopen(req, timeout=180) as response:
-        content = response.read()
-
-    destino.write_bytes(content)
-
-    print(f"Descargado: {destino.name} · {len(content) / 1024:.1f} KB")
 
 
 def buscar_shp(carpeta):
