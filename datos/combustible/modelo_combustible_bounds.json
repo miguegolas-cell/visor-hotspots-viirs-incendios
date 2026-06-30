@@ -1,12 +1,23 @@
 {
   "bounds": [
     [
-      37.815758868858026,
+      37.81577601642947,
       -1.566798229821194
     ],
     [
       40.82737479390208,
-      0.5462321909082989
+      0.5461843336387061
     ]
-  ]
+  ],
+  "origen": "Modelo de combustible Comunitat Valenciana corregido para Leaflet",
+  "correccion": "PNG generado en EPSG:3857 / Web Mercator",
+  "bounds_en": "EPSG:4326",
+  "crs_original": "EPSG:25830",
+  "crs_png": "EPSG:3857",
+  "raster_original": "MC_CV_ras(3).tif",
+  "png_generado": {
+    "width": 1193,
+    "height": 2200
+  },
+  "nota": "Usar con L.imageOverlay(url, bounds). La imagen está en Web Mercator para coincidir con Leaflet."
 }
