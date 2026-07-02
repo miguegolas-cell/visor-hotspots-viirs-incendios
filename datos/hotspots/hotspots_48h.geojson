@@ -4,36 +4,6 @@
     {
       "type": "Feature",
       "properties": {
-        "LATITUDE": 39.66316,
-        "LONGITUDE": -0.24886,
-        "BRIGHT_TI4": 307.01,
-        "SCAN": 0.4,
-        "TRACK": 0.37,
-        "ACQ_DATE": "2026-06-28",
-        "ACQ_TIME": "0158",
-        "SATELLITE": "N",
-        "CONFIDENCE": "nominal",
-        "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 295.75,
-        "FRP": 0.87,
-        "DAYNIGHT": "N",
-        "metvlc_fuente": "NASA FIRMS · SUOMI-NPP VIIRS C2",
-        "metvlc_periodo_origen": "48h",
-        "metvlc_satellite": "N",
-        "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-06-28T01:58:00+00:00"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -0.24886,
-          39.66316
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "LATITUDE": 39.95136,
         "LONGITUDE": -0.00821,
         "BRIGHT_TI4": 306.07,
@@ -88,6 +58,66 @@
         "coordinates": [
           -0.00412,
           39.95111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LATITUDE": 38.72572,
+        "LONGITUDE": -0.67338,
+        "BRIGHT_TI4": 335.76,
+        "SCAN": 0.4,
+        "TRACK": 0.45,
+        "ACQ_DATE": "2026-06-30",
+        "ACQ_TIME": "1242",
+        "SATELLITE": "N",
+        "CONFIDENCE": "low",
+        "VERSION": "2.0NRT",
+        "BRIGHT_TI5": 309.07,
+        "FRP": 7.36,
+        "DAYNIGHT": "D",
+        "metvlc_fuente": "NASA FIRMS · SUOMI-NPP VIIRS C2",
+        "metvlc_periodo_origen": "48h",
+        "metvlc_satellite": "N",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": "2026-06-30T12:42:00+00:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.67338,
+          38.72572
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LATITUDE": 39.47046,
+        "LONGITUDE": -0.42925,
+        "BRIGHT_TI4": 337.26,
+        "SCAN": 0.57,
+        "TRACK": 0.43,
+        "ACQ_DATE": "2026-06-30",
+        "ACQ_TIME": "1242",
+        "SATELLITE": "N",
+        "CONFIDENCE": "nominal",
+        "VERSION": "2.0NRT",
+        "BRIGHT_TI5": 307.51,
+        "FRP": 2.85,
+        "DAYNIGHT": "D",
+        "metvlc_fuente": "NASA FIRMS · SUOMI-NPP VIIRS C2",
+        "metvlc_periodo_origen": "48h",
+        "metvlc_satellite": "N",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": "2026-06-30T12:42:00+00:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.42925,
+          39.47046
         ]
       }
     }
