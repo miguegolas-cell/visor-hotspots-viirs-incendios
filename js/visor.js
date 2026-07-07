@@ -80,9 +80,69 @@ const cartoLight = L.tileLayer(
   }
 );
 
+// -------------------------------
+// Capas base Esri: satélite y relieve
+// -------------------------------
+
+function crearEsriWorldImagery() {
+  return L.tileLayer(
+    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    {
+      maxZoom: 19,
+      attribution: "Tiles &copy; Esri"
+    }
+  );
+}
+
+function crearEsriHillshade(opacity = 0.32) {
+  return L.tileLayer(
+    "https://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}",
+    {
+      maxNativeZoom: 13,
+      maxZoom: 19,
+      opacity: opacity,
+      attribution: "Hillshade &copy; Esri"
+    }
+  );
+}
+
+function crearEsriEtiquetas() {
+  return L.tileLayer(
+    "https://services.arcgisonline.com/arcgis/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+    {
+      maxZoom: 19,
+      attribution: "Labels &copy; Esri"
+    }
+  );
+}
+
+function crearEsriRelieveSombreado() {
+  return L.tileLayer(
+    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}",
+    {
+      maxNativeZoom: 13,
+      maxZoom: 19,
+      attribution: "Relief &copy; Esri"
+    }
+  );
+}
+
+const esriSatelite = crearEsriWorldImagery();
+
+const esriSateliteRelieve = L.layerGroup([
+  crearEsriWorldImagery(),
+  crearEsriHillshade(0.28),
+  crearEsriEtiquetas()
+]);
+
+const esriRelieveSombreado = crearEsriRelieveSombreado();
+
 const baseLayers = {
   "OpenStreetMap": osm,
-  "Carto claro": cartoLight
+  "Carto claro": cartoLight,
+  "Satélite + relieve": esriSateliteRelieve,
+  "Satélite Esri": esriSatelite,
+  "Relieve sombreado": esriRelieveSombreado
 };
 
 const overlayLayers = {};
