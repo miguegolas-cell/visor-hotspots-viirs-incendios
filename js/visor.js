@@ -647,76 +647,85 @@ async function cargarLeyendasRasteres() {
   actualizarLeyendasCapasRaster();
 }
 
-function extraerItemsLeyenda(data) {
-  if (!data) return [];
+function primerColorGrupo(grupo) {
+  if (!grupo) return "#999999";
 
-  if (Array.isArray(data)) {
-    return data;
+  if (grupo.color || grupo.colour || grupo.fill || grupo.hex || grupo.rgb) {
+    return grupo.color || grupo.colour || grupo.fill || grupo.hex || grupo.rgb;
   }
 
-  if (Array.isArray(data.items)) {
-    return data.items;
+  if (Array.isArray(grupo.items) && grupo.items.length) {
+    const item = grupo.items.find(x => x.color || x.colour || x.fill || x.hex || x.rgb);
+    if (item) {
+      return item.color || item.colour || item.fill || item.hex || item.rgb;
+    }
   }
 
-  if (Array.isArray(data.grupos)) {
-    return data.grupos;
-  }
-
-  if (Array.isArray(data.clases)) {
-    return data.clases;
-  }
-
-  if (Array.isArray(data.leyenda)) {
-    return data.leyenda;
-  }
-
-  return [];
-}
-
-function colorItemLeyenda(item) {
-  return (
-    item.color ||
-    item.colour ||
-    item.fill ||
-    item.hex ||
-    item.rgb ||
-    "#999999"
-  );
+  return "#999999";
 }
 
 function textoItemLeyenda(item) {
   return (
-    item.label ||
-    item.nombre ||
-    item.name ||
-    item.clase ||
-    item.valor ||
-    item.descripcion ||
+    item?.label ||
+    item?.nombre ||
+    item?.name ||
+    item?.clase ||
+    item?.valor ||
+    item?.descripcion ||
+    item?.texto ||
     ""
   );
 }
 
-function htmlLeyendaRaster(titulo, data) {
-  const items = extraerItemsLeyenda(data);
+function colorItemLeyenda(item) {
+  return (
+    item?.color ||
+    item?.colour ||
+    item?.fill ||
+    item?.hex ||
+    item?.rgb ||
+    "#999999"
+  );
+}
 
+function htmlItemLeyenda(label, color) {
+  const borde = color === "transparent" ? "border:1px dashed #666;" : "";
+
+  return `
+    <div class="legend-item">
+      <span class="legend-color" style="background:${color};${borde}"></span>
+      <span>${label}</span>
+    </div>
+  `;
+}
+
+function htmlLeyendaCombustible(data) {
   let html = `<div class="raster-legend-section">`;
-  html += `<div class="legend-title">${titulo}</div>`;
+  html += `<div class="legend-title">${data?.titulo || "Modelo de combustible"}</div>`;
 
-  if (!items.length) {
-    html += `<div class="measure-small">Leyenda no disponible.</div>`;
-  } else {
-    items.forEach(item => {
-      html += `
-        <div class="legend-item">
-          <span class="legend-color" style="background:${colorItemLeyenda(item)}"></span>
-          <span>${textoItemLeyenda(item)}</span>
-        </div>
-      `;
+  if (data && Array.isArray(data.grupos) && data.grupos.length) {
+    data.grupos.forEach(grupo => {
+      const nombreGrupo = grupo.nombre || grupo.label || grupo.name || "Grupo";
+      const colorGrupo = primerColorGrupo(grupo);
+
+      // Leyenda simplificada: un color por agrupación operativa.
+      html += htmlItemLeyenda(nombreGrupo, colorGrupo);
     });
+  } else if (data && Array.isArray(data.items)) {
+    data.items.forEach(item => {
+      html += htmlItemLeyenda(textoItemLeyenda(item), colorItemLeyenda(item));
+    });
+  } else {
+    html += `<div class="measure-small">Leyenda de combustible no disponible.</div>`;
   }
 
-  if (data && data.nota) {
-    html += `<div class="measure-small">${data.nota}</div>`;
+  if (data && Array.isArray(data.clases_no_representadas) && data.clases_no_representadas.length) {
+    html += `
+      <details class="legend-details">
+        <summary>Clases no representadas</summary>
+        <div class="measure-small">${data.clases_no_representadas.join("<br>")}</div>
+      </details>
+    `;
   }
 
   if (data && data.ambito) {
@@ -724,7 +733,85 @@ function htmlLeyendaRaster(titulo, data) {
   }
 
   html += `</div>`;
+  return html;
+}
 
+function htmlLeyendaPendiente(data) {
+  let html = `<div class="raster-legend-section">`;
+  html += `<div class="legend-title">${data?.titulo || "Pendiente"}</div>`;
+
+  const items = data?.clases || data?.items || data?.leyenda || [];
+
+  if (Array.isArray(items) && items.length) {
+    items.forEach(item => {
+      html += htmlItemLeyenda(textoItemLeyenda(item), colorItemLeyenda(item));
+    });
+  } else {
+    html += `<div class="measure-small">Leyenda de pendiente no disponible.</div>`;
+  }
+
+  if (data && data.ambito) {
+    html += `<div class="measure-small">${data.ambito}</div>`;
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+function htmlLeyendaNdmi(data) {
+  let html = `<div class="raster-legend-section">`;
+  html += `<div class="legend-title">${data?.titulo || "NDMI"}</div>`;
+
+  // NDMI no viene como clases de color, sino como interpretación.
+  // Por eso se representa con barra gradual: cálido/seco -> frío/húmedo.
+  html += `
+    <div class="ndmi-gradient"></div>
+    <div class="ndmi-labels">
+      <span>Menor humedad<br><strong>más seco</strong></span>
+      <span>Mayor humedad<br><strong>más húmedo</strong></span>
+    </div>
+  `;
+
+  if (data && Array.isArray(data.interpretacion)) {
+    data.interpretacion.forEach(item => {
+      const texto = item.texto || "";
+      const significado = item.significado || "";
+      html += `
+        <div class="legend-item ndmi-text-item">
+          <span class="legend-dot"></span>
+          <span><strong>${texto}</strong>: ${significado}</span>
+        </div>
+      `;
+    });
+  }
+
+  if (data && data.tratamiento) {
+    html += `<div class="measure-small">${data.tratamiento}</div>`;
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+function htmlLeyendaGenerica(titulo, data) {
+  let html = `<div class="raster-legend-section">`;
+  html += `<div class="legend-title">${titulo}</div>`;
+
+  const items =
+    (Array.isArray(data?.items) && data.items) ||
+    (Array.isArray(data?.clases) && data.clases) ||
+    (Array.isArray(data?.leyenda) && data.leyenda) ||
+    [];
+
+  if (items.length) {
+    items.forEach(item => {
+      html += htmlItemLeyenda(textoItemLeyenda(item), colorItemLeyenda(item));
+    });
+  } else {
+    html += `<div class="measure-small">Leyenda no disponible.</div>`;
+  }
+
+  html += `</div>`;
   return html;
 }
 
@@ -736,18 +823,15 @@ function actualizarLeyendasCapasRaster() {
   let html = "";
 
   if (combustibleLayer && map.hasLayer(combustibleLayer)) {
-    const titulo = combustibleLegendData?.titulo || "Modelo de combustible";
-    html += htmlLeyendaRaster(titulo, combustibleLegendData);
+    html += htmlLeyendaCombustible(combustibleLegendData);
   }
 
   if (pendienteLayer && map.hasLayer(pendienteLayer)) {
-    const titulo = pendienteLegendData?.titulo || "Pendiente";
-    html += htmlLeyendaRaster(titulo, pendienteLegendData);
+    html += htmlLeyendaPendiente(pendienteLegendData);
   }
 
   if (ndmiLayer && map.hasLayer(ndmiLayer)) {
-    const titulo = ndmiLegendData?.titulo || "NDMI";
-    html += htmlLeyendaRaster(titulo, ndmiLegendData);
+    html += htmlLeyendaNdmi(ndmiLegendData);
   }
 
   if (!html) {
