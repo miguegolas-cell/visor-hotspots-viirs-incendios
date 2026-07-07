@@ -1,61 +1,85 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>MetVlc · Puntos calientes VIIRS</title>
 
+  <!-- Leaflet -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     crossorigin=""
   />
 
-  <link rel="stylesheet" href="css/style.css?v=20260701-1" />
+  <!-- Leaflet Draw -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css"
+  />
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="css/style.css?v=20260707-1" />
 </head>
 
 <body>
   <div class="page">
 
     <header class="header">
-      <div class="title">MetVlc · Visor de puntos calientes VIIRS</div>
-      <div class="subtitle">
-        NASA FIRMS · SUOMI-NPP VIIRS C2 · Comunitat Valenciana · Combustible · Pendiente · NDMI
+      <div class="header-text">
+        <h1>MetVlc · Visor de puntos calientes VIIRS</h1>
+        <p>
+          NASA FIRMS · Suomi-NPP · NOAA-20 · NOAA-21 · Comunitat Valenciana ·
+          Combustible · Pendiente · NDMI
+        </p>
       </div>
     </header>
 
     <section class="toolbar">
-      <div class="toolbar-title">Periodo de puntos calientes</div>
+      <div class="toolbar-left">
+        <span class="toolbar-title">Periodo:</span>
 
-      <div class="buttons">
-        <button class="time-btn active" data-hours="24">Últimas 24 h</button>
-        <button class="time-btn" data-hours="48">Últimas 48 h</button>
-        <button class="time-btn" data-hours="72">Últimas 72 h</button>
-        <button class="time-btn" data-hours="168">Últimos 7 días</button>
+        <button class="period-btn active" data-period="24h">24 h</button>
+        <button class="period-btn" data-period="48h">48 h</button>
+        <button class="period-btn" data-period="72h">72 h</button>
+        <button class="period-btn" data-period="7d">7 días</button>
       </div>
 
-      <div id="infoHotspots" class="info-hotspots">
-        Cargando puntos calientes...
+      <div class="toolbar-right">
+        <span id="estadoDatos">Cargando datos...</span>
       </div>
     </section>
 
-    <div id="map"></div>
+    <main class="map-wrap">
+      <div id="map"></div>
+    </main>
 
-    <section class="footer">
-      <strong>Ámbito:</strong> Comunitat Valenciana ·
-      <strong>Fuente hotspots:</strong> NASA FIRMS · SUOMI-NPP VIIRS C2 ·
-      <strong>Visualización:</strong> MetVlc ·
-      Datos orientativos para seguimiento de anomalías térmicas e incendios activos.
-    </section>
+    <footer class="footer">
+      <div>
+        <strong>Ámbito:</strong> Comunitat Valenciana ·
+        <strong>Fuente:</strong> NASA FIRMS VIIRS Collection 2
+      </div>
+      <div>
+        Los puntos calientes son detecciones térmicas satelitales y deben interpretarse como localizaciones aproximadas.
+      </div>
+    </footer>
 
   </div>
 
+  <!-- Leaflet -->
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     crossorigin="">
   </script>
 
-  <script src="js/visor.js?v=20260701-1"></script>
+  <!-- Leaflet Draw -->
+  <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+
+  <!-- Turf para superficie y perímetro -->
+  <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+
+  <!-- Script propio -->
+  <script src="js/visor.js?v=20260707-1"></script>
 </body>
 </html>
