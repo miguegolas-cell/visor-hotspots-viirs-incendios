@@ -165,6 +165,10 @@ let combustibleLayer = null;
 let pendienteLayer = null;
 let ndmiLayer = null;
 
+let combustibleLegendData = null;
+let pendienteLegendData = null;
+let ndmiLegendData = null;
+
 let activePeriod = "24h";
 
 
@@ -592,6 +596,177 @@ async function crearLeyendaDesdeJson(titulo, url, posicion) {
     return null;
   }
 }
+
+
+
+// ===============================
+// LEYENDAS DINÁMICAS DE CAPAS RÁSTER
+// Combustible · Pendiente · NDMI
+// ===============================
+
+const leyendaCapasControl = L.control({
+  position: "bottomleft"
+});
+
+leyendaCapasControl.onAdd = function () {
+  const div = L.DomUtil.create("div", "legend raster-legend");
+  div.id = "leyendaCapasRaster";
+
+  div.innerHTML = `
+    <div class="legend-title">Leyenda capas</div>
+    <div class="measure-small">Activa combustible, pendiente o NDMI para ver su leyenda.</div>
+  `;
+
+  L.DomEvent.disableClickPropagation(div);
+  L.DomEvent.disableScrollPropagation(div);
+
+  return div;
+};
+
+leyendaCapasControl.addTo(map);
+
+async function cargarLeyendasRasteres() {
+  try {
+    combustibleLegendData = await fetchJson(COMBUSTIBLE_LEYENDA);
+  } catch (error) {
+    console.warn("No se pudo cargar leyenda de combustible", error);
+  }
+
+  try {
+    pendienteLegendData = await fetchJson(PENDIENTE_LEYENDA);
+  } catch (error) {
+    console.warn("No se pudo cargar leyenda de pendiente", error);
+  }
+
+  try {
+    ndmiLegendData = await fetchJson(NDMI_LEYENDA);
+  } catch (error) {
+    console.warn("No se pudo cargar leyenda NDMI", error);
+  }
+
+  actualizarLeyendasCapasRaster();
+}
+
+function extraerItemsLeyenda(data) {
+  if (!data) return [];
+
+  if (Array.isArray(data)) {
+    return data;
+  }
+
+  if (Array.isArray(data.items)) {
+    return data.items;
+  }
+
+  if (Array.isArray(data.grupos)) {
+    return data.grupos;
+  }
+
+  if (Array.isArray(data.clases)) {
+    return data.clases;
+  }
+
+  if (Array.isArray(data.leyenda)) {
+    return data.leyenda;
+  }
+
+  return [];
+}
+
+function colorItemLeyenda(item) {
+  return (
+    item.color ||
+    item.colour ||
+    item.fill ||
+    item.hex ||
+    item.rgb ||
+    "#999999"
+  );
+}
+
+function textoItemLeyenda(item) {
+  return (
+    item.label ||
+    item.nombre ||
+    item.name ||
+    item.clase ||
+    item.valor ||
+    item.descripcion ||
+    ""
+  );
+}
+
+function htmlLeyendaRaster(titulo, data) {
+  const items = extraerItemsLeyenda(data);
+
+  let html = `<div class="raster-legend-section">`;
+  html += `<div class="legend-title">${titulo}</div>`;
+
+  if (!items.length) {
+    html += `<div class="measure-small">Leyenda no disponible.</div>`;
+  } else {
+    items.forEach(item => {
+      html += `
+        <div class="legend-item">
+          <span class="legend-color" style="background:${colorItemLeyenda(item)}"></span>
+          <span>${textoItemLeyenda(item)}</span>
+        </div>
+      `;
+    });
+  }
+
+  if (data && data.nota) {
+    html += `<div class="measure-small">${data.nota}</div>`;
+  }
+
+  if (data && data.ambito) {
+    html += `<div class="measure-small">${data.ambito}</div>`;
+  }
+
+  html += `</div>`;
+
+  return html;
+}
+
+function actualizarLeyendasCapasRaster() {
+  const div = document.getElementById("leyendaCapasRaster");
+
+  if (!div) return;
+
+  let html = "";
+
+  if (combustibleLayer && map.hasLayer(combustibleLayer)) {
+    const titulo = combustibleLegendData?.titulo || "Modelo de combustible";
+    html += htmlLeyendaRaster(titulo, combustibleLegendData);
+  }
+
+  if (pendienteLayer && map.hasLayer(pendienteLayer)) {
+    const titulo = pendienteLegendData?.titulo || "Pendiente";
+    html += htmlLeyendaRaster(titulo, pendienteLegendData);
+  }
+
+  if (ndmiLayer && map.hasLayer(ndmiLayer)) {
+    const titulo = ndmiLegendData?.titulo || "NDMI";
+    html += htmlLeyendaRaster(titulo, ndmiLegendData);
+  }
+
+  if (!html) {
+    html = `
+      <div class="legend-title">Leyenda capas</div>
+      <div class="measure-small">Activa combustible, pendiente o NDMI para ver su leyenda.</div>
+    `;
+  }
+
+  div.innerHTML = html;
+}
+
+map.on("overlayadd", function () {
+  actualizarLeyendasCapasRaster();
+});
+
+map.on("overlayremove", function () {
+  actualizarLeyendasCapasRaster();
+});
 
 
 // ===============================
@@ -1220,6 +1395,7 @@ async function init() {
 
   await cargarLimiteCV();
   await cargarRasteres();
+  await cargarLeyendasRasteres();
 
   activarControlesOpacidad();
 
