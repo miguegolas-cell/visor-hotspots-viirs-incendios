@@ -1,100 +1,20 @@
-// ===============================
-// METVLC · VISOR HOTSPOTS VIIRS
-// NASA FIRMS · SUOMI-NPP VIIRS C2
-// Comunitat Valenciana
-// Hotspots + combustible + pendiente + NDMI
-// ===============================
+// ============================================================
+// METVLC · VISOR PUNTOS CALIENTES VIIRS
+// Hotspots NASA FIRMS · Comunitat Valenciana
+// Capas: hotspots, límite CV, combustible, pendiente, NDMI
+// Herramienta: dibujar perímetro + cálculo superficie/perímetro + KML
+// ============================================================
 
-console.log("visor.js hotspots VIIRS cargado correctamente");
-
-// ===============================
-// MAPA
-// ===============================
-
-const map = L.map("map", {
-  center: [39.35, -0.45],
-  zoom: 8,
-  minZoom: 7,
-  maxZoom: 16
-});
-
-// ===============================
-// ORDEN DE CAPAS
-// ===============================
-
-map.createPane("pendientePane");
-map.getPane("pendientePane").style.zIndex = 330;
-
-map.createPane("ndmiPane");
-map.getPane("ndmiPane").style.zIndex = 340;
-
-map.createPane("combustiblePane");
-map.getPane("combustiblePane").style.zIndex = 350;
-
-map.createPane("limitePane");
-map.getPane("limitePane").style.zIndex = 500;
-
-map.createPane("hotspotsPane");
-map.getPane("hotspotsPane").style.zIndex = 650;
-
-// ===============================
-// CAPAS BASE
-// ===============================
-
-const osm = L.tileLayer(
-  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-  {
-    maxZoom: 19,
-    attribution: "&copy; OpenStreetMap"
-  }
-).addTo(map);
-
-const cartoLight = L.tileLayer(
-  "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-  {
-    maxZoom: 19,
-    attribution: "&copy; OpenStreetMap &copy; CARTO"
-  }
-);
-
-const baseLayers = {
-  "OpenStreetMap": osm,
-  "Carto claro": cartoLight
-};
-
-// ===============================
-// GRUPOS DE CAPAS
-// ===============================
-// Por defecto se activan los hotspots y el límite de la Comunitat.
-// Combustible, pendiente y NDMI quedan disponibles en el selector.
-
-const pendienteLayer = L.layerGroup();
-const ndmiLayer = L.layerGroup();
-const combustibleLayer = L.layerGroup();
-const limiteLayer = L.layerGroup().addTo(map);
-const hotspotsLayer = L.layerGroup().addTo(map);
-
-const overlayLayers = {
-  "Puntos calientes VIIRS": hotspotsLayer,
-  "Límite Comunitat Valenciana": limiteLayer,
-  "Modelo de combustible": combustibleLayer,
-  "Pendiente": pendienteLayer,
-  "NDMI Comunitat Valenciana": ndmiLayer
-};
-
-L.control.layers(baseLayers, overlayLayers, {
-  collapsed: false
-}).addTo(map);
 
 // ===============================
 // RUTAS
 // ===============================
 
 const HOTSPOTS_FILES = {
-  24: "datos/hotspots/hotspots_24h.geojson",
-  48: "datos/hotspots/hotspots_48h.geojson",
-  72: "datos/hotspots/hotspots_72h.geojson",
-  168: "datos/hotspots/hotspots_7d.geojson"
+  "24h": "datos/hotspots/hotspots_24h.geojson",
+  "48h": "datos/hotspots/hotspots_48h.geojson",
+  "72h": "datos/hotspots/hotspots_72h.geojson",
+  "7d": "datos/hotspots/hotspots_7d.geojson"
 };
 
 const HOTSPOTS_MANIFEST = "datos/hotspots/manifest_hotspots.json";
@@ -107,408 +27,515 @@ const COMBUSTIBLE_LEYENDA = "datos/combustible/modelo_combustible_leyenda.json";
 
 const PENDIENTE_IMAGE = "datos/pendiente/pendiente.png";
 const PENDIENTE_BOUNDS = "datos/pendiente/pendiente_bounds.json";
+const PENDIENTE_LEYENDA = "datos/pendiente/pendiente_leyenda.json";
 
 const NDMI_IMAGE = "datos/ndmi/ultimo_ndmi.png";
 const NDMI_BOUNDS = "datos/ndmi/ndmi_bounds.json";
+const NDMI_LEYENDA = "datos/ndmi/ndmi_leyenda.json";
+
 
 // ===============================
-// VARIABLES
+// MAPA
 // ===============================
 
-let primeraCargaHotspots = true;
-let limiteGeojsonLayer = null;
+const map = L.map("map", {
+  center: [39.35, -0.45],
+  zoom: 8,
+  minZoom: 7,
+  maxZoom: 18,
+  zoomControl: true
+});
 
-let combustibleOverlay = null;
-let pendienteOverlay = null;
-let ndmiOverlay = null;
+map.createPane("panePendiente");
+map.getPane("panePendiente").style.zIndex = 330;
 
-let combustibleOpacity = 0.55;
-let pendienteOpacity = 0.65;
-let ndmiOpacity = 0.65;
+map.createPane("paneNdmi");
+map.getPane("paneNdmi").style.zIndex = 340;
+
+map.createPane("paneCombustible");
+map.getPane("paneCombustible").style.zIndex = 350;
+
+map.createPane("paneLimite");
+map.getPane("paneLimite").style.zIndex = 500;
+
+map.createPane("paneHotspots");
+map.getPane("paneHotspots").style.zIndex = 650;
+
+map.createPane("paneDibujo");
+map.getPane("paneDibujo").style.zIndex = 700;
+
+const osm = L.tileLayer(
+  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  {
+    maxZoom: 19,
+    attribution: "&copy; OpenStreetMap"
+  }
+).addTo(map);
+
+const cartoLight = L.tileLayer(
+  "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+  {
+    maxZoom: 20,
+    attribution: "&copy; OpenStreetMap &copy; CARTO"
+  }
+);
+
+const baseLayers = {
+  "OpenStreetMap": osm,
+  "Carto claro": cartoLight
+};
+
+const overlayLayers = {};
+
+let layerControl = L.control.layers(baseLayers, overlayLayers, {
+  collapsed: false
+}).addTo(map);
+
+
+// ===============================
+// VARIABLES DE CAPAS
+// ===============================
+
+let hotspotsLayer = L.layerGroup([], {
+  pane: "paneHotspots"
+}).addTo(map);
+
+let limiteLayer = null;
+let combustibleLayer = null;
+let pendienteLayer = null;
+let ndmiLayer = null;
+
+let activePeriod = "24h";
+
 
 // ===============================
 // UTILIDADES
 // ===============================
 
 function urlNoCache(url) {
-  return `${url}?v=${Date.now()}`;
+  const sep = url.includes("?") ? "&" : "?";
+  return `${url}${sep}v=${Date.now()}`;
 }
 
-function setInfoHotspots(texto) {
-  const info = document.getElementById("infoHotspots");
-
-  if (info) {
-    info.textContent = texto;
-  }
-
-  console.log(texto);
+function setEstado(texto) {
+  const el = document.getElementById("estadoDatos");
+  if (el) el.textContent = texto;
 }
 
-async function cargarJSON(url) {
-  const response = await fetch(urlNoCache(url), {
-    cache: "no-store"
-  });
+async function fetchJson(url) {
+  const response = await fetch(urlNoCache(url));
 
   if (!response.ok) {
-    throw new Error(`No se pudo cargar ${url} · HTTP ${response.status}`);
+    throw new Error(`No se pudo cargar ${url}: ${response.status}`);
   }
 
-  return await response.json();
+  return response.json();
 }
 
-function convertirBounds(data) {
-  if (data.bounds && Array.isArray(data.bounds)) {
-    return L.latLngBounds(data.bounds);
-  }
+function normalizarFechaUTC(valor) {
+  if (!valor) return null;
 
-  if (data.bbox) {
-    return L.latLngBounds(
-      [data.bbox.lat_min, data.bbox.lon_min],
-      [data.bbox.lat_max, data.bbox.lon_max]
-    );
-  }
+  const fecha = new Date(valor);
 
-  throw new Error("Archivo bounds sin formato válido");
+  if (Number.isNaN(fecha.getTime())) return null;
+
+  return fecha;
 }
 
-async function cargarBounds(url) {
-  const data = await cargarJSON(url);
-  const bounds = convertirBounds(data);
-
-  if (!bounds.isValid()) {
-    throw new Error(`Bounds no válidos en ${url}`);
-  }
-
-  return bounds;
-}
-
-function getProp(props, nombres, valorDefecto = "") {
-  for (const nombre of nombres) {
-    if (props[nombre] !== undefined && props[nombre] !== null && props[nombre] !== "") {
-      return props[nombre];
-    }
-
-    const lower = nombre.toLowerCase();
-    const upper = nombre.toUpperCase();
-
-    if (props[lower] !== undefined && props[lower] !== null && props[lower] !== "") {
-      return props[lower];
-    }
-
-    if (props[upper] !== undefined && props[upper] !== null && props[upper] !== "") {
-      return props[upper];
-    }
-  }
-
-  return valorDefecto;
-}
-
-// ===============================
-// LÍMITE COMUNITAT VALENCIANA
-// ===============================
-
-async function cargarLimiteCV() {
-  try {
-    const data = await cargarJSON(LIMITE_CV);
-
-    limiteGeojsonLayer = L.geoJSON(data, {
-      pane: "limitePane",
-      style: {
-        color: "#174d6d",
-        weight: 2,
-        opacity: 0.95,
-        fill: false
-      }
-    });
-
-    limiteGeojsonLayer.addTo(limiteLayer);
-
-    const bounds = limiteGeojsonLayer.getBounds();
-
-    if (bounds.isValid()) {
-      map.fitBounds(bounds.pad(0.08));
-    }
-
-    console.log("Límite Comunitat Valenciana cargado correctamente");
-
-  } catch (error) {
-    console.warn("No se pudo cargar el límite de la Comunitat Valenciana:", error);
-  }
-}
-
-// ===============================
-// FECHAS HOTSPOTS
-// ===============================
-
-function parseFechaUTC(value) {
-  if (!value) return null;
-
-  const d = new Date(value);
-
-  if (isNaN(d.getTime())) {
-    return null;
-  }
-
-  return d;
-}
-
-function edadHoras(feature) {
-  const props = feature.properties || {};
-  const fecha = parseFechaUTC(props.metvlc_time_utc);
+function horasDesdeFecha(valor) {
+  const fecha = normalizarFechaUTC(valor);
 
   if (!fecha) return null;
 
-  return (new Date() - fecha) / 1000 / 3600;
+  return (Date.now() - fecha.getTime()) / 3600000;
 }
 
-function colorPorEdad(horas) {
-  if (horas === null) return "#666666";
-  if (horas <= 6) return "#ff0000";
-  if (horas <= 24) return "#ff8c00";
-  if (horas <= 48) return "#ffd400";
-  if (horas <= 72) return "#7a7a7a";
-  return "#6a3d9a";
-}
+function formatoFecha(valor) {
+  const fecha = normalizarFechaUTC(valor);
 
-function radioPorEdad(horas) {
-  if (horas === null) return 7;
-  if (horas <= 6) return 10;
-  if (horas <= 24) return 9;
-  if (horas <= 48) return 8;
-  if (horas <= 72) return 7;
-  return 6;
-}
+  if (!fecha) return "Sin fecha";
 
-function formatearFecha(value) {
-  const d = parseFechaUTC(value);
-
-  if (!d) return "Sin fecha";
-
-  return d.toLocaleString("es-ES", {
-    timeZone: "Europe/Madrid",
+  return fecha.toLocaleString("es-ES", {
+    timeZone: "UTC",
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit"
-  });
+  }) + " UTC";
 }
 
-function textoPeriodo(horas) {
-  if (horas === 168) return "7 días";
-  return `${horas} h`;
+function getProp(props, keys, fallback = "") {
+  for (const key of keys) {
+    if (props[key] !== undefined && props[key] !== null && props[key] !== "") {
+      return props[key];
+    }
+  }
+
+  return fallback;
 }
 
-// ===============================
-// POPUP HOTSPOTS
-// ===============================
+function colorPorAntiguedad(props) {
+  const fecha = getProp(props, [
+    "metvlc_time_utc",
+    "ACQ_DATE",
+    "acq_date"
+  ], null);
 
-function crearPopupHotspot(feature) {
-  const props = feature.properties || {};
-  const coords = feature.geometry?.coordinates || [];
+  let horas = null;
 
-  const lon = coords[0];
-  const lat = coords[1];
+  if (props.metvlc_time_utc) {
+    horas = horasDesdeFecha(props.metvlc_time_utc);
+  }
 
-  const h = edadHoras(feature);
-  const antiguedad = h !== null ? `${h.toFixed(1)} h` : "No disponible";
+  if (horas === null) {
+    return "#ff3b00";
+  }
 
-  const satellite = getProp(props, ["metvlc_satellite", "satellite"], "SUOMI-NPP");
-  const instrument = getProp(props, ["metvlc_instrument", "instrument"], "VIIRS");
-  const confidence = getProp(props, ["confidence", "CONFIDENCE"], "No disponible");
-  const frp = getProp(props, ["frp", "FRP"], "No disponible");
-  const brightTi4 = getProp(props, ["bright_ti4", "BRIGHT_TI4"], "No disponible");
-  const brightTi5 = getProp(props, ["bright_ti5", "BRIGHT_TI5"], "No disponible");
-  const daynight = getProp(props, ["daynight", "DAYNIGHT"], "No disponible");
-  const source = getProp(props, ["metvlc_fuente"], "NASA FIRMS · SUOMI-NPP VIIRS C2");
+  if (horas <= 6) return "#ff0000";
+  if (horas <= 24) return "#ff8c00";
+  if (horas <= 48) return "#ffd400";
+  if (horas <= 72) return "#7a7a7a";
+
+  return "#6a3d9a";
+}
+
+function radioPorConfianza(props) {
+  const conf = getProp(props, ["CONFIDENCE", "confidence"], "");
+  const confNum = Number(conf);
+
+  if (!Number.isNaN(confNum)) {
+    if (confNum >= 80) return 7;
+    if (confNum >= 50) return 6;
+    return 5;
+  }
+
+  const confText = String(conf).toLowerCase();
+
+  if (confText.includes("high")) return 7;
+  if (confText.includes("nominal")) return 6;
+  if (confText.includes("low")) return 5;
+
+  return 6;
+}
+
+function popupHotspot(feature) {
+  const p = feature.properties || {};
+
+  const sat = getProp(p, [
+    "metvlc_satellite",
+    "SATELLITE",
+    "satellite"
+  ], "VIIRS");
+
+  const instrumento = getProp(p, [
+    "metvlc_instrument",
+    "INSTRUMENT",
+    "instrument"
+  ], "VIIRS");
+
+  const fecha = getProp(p, [
+    "metvlc_time_utc"
+  ], null);
+
+  const acqDate = getProp(p, ["ACQ_DATE", "acq_date"], "");
+  const acqTime = getProp(p, ["ACQ_TIME", "acq_time"], "");
+
+  const confianza = getProp(p, ["CONFIDENCE", "confidence"], "—");
+  const frp = getProp(p, ["FRP", "frp"], "—");
+  const brightT31 = getProp(p, ["BRIGHT_T31", "bright_t31"], "—");
+  const brightTi4 = getProp(p, ["BRIGHT_TI4", "bright_ti4"], "—");
+  const brightTi5 = getProp(p, ["BRIGHT_TI5", "bright_ti5"], "—");
+  const daynight = getProp(p, ["DAYNIGHT", "daynight"], "—");
+  const fuente = getProp(p, ["metvlc_fuente"], "NASA FIRMS");
+
+  let fechaTexto = "Sin fecha";
+
+  if (fecha) {
+    fechaTexto = formatoFecha(fecha);
+  } else if (acqDate) {
+    fechaTexto = `${acqDate} ${acqTime || ""} UTC`;
+  }
 
   return `
-    <div style="min-width:250px">
-      <strong>Punto caliente VIIRS</strong><br>
-      <hr style="margin:6px 0">
-
-      <strong>Fecha:</strong> ${formatearFecha(props.metvlc_time_utc)}<br>
-      <strong>Antigüedad:</strong> ${antiguedad}<br>
-      <strong>Satélite:</strong> ${satellite}<br>
-      <strong>Sensor:</strong> ${instrument}<br>
-      <strong>Confianza:</strong> ${confidence}<br>
-      <strong>FRP:</strong> ${frp}<br>
-      <strong>Bright TI4:</strong> ${brightTi4}<br>
-      <strong>Bright TI5:</strong> ${brightTi5}<br>
-      <strong>Día/noche:</strong> ${daynight}<br>
-      <strong>Lat/Lon:</strong> ${lat?.toFixed(5)}, ${lon?.toFixed(5)}
-
-      <hr style="margin:6px 0">
-      <small>${source}</small>
-    </div>
+    <div class="popup-title">Punto caliente</div>
+    <table class="popup-table">
+      <tr><td>Satélite</td><td>${sat}</td></tr>
+      <tr><td>Sensor</td><td>${instrumento}</td></tr>
+      <tr><td>Fecha</td><td>${fechaTexto}</td></tr>
+      <tr><td>Confianza</td><td>${confianza}</td></tr>
+      <tr><td>FRP</td><td>${frp}</td></tr>
+      <tr><td>Bright T31</td><td>${brightT31}</td></tr>
+      <tr><td>Bright TI4</td><td>${brightTi4}</td></tr>
+      <tr><td>Bright TI5</td><td>${brightTi5}</td></tr>
+      <tr><td>Día/noche</td><td>${daynight}</td></tr>
+      <tr><td>Fuente</td><td>${fuente}</td></tr>
+    </table>
   `;
 }
 
+
 // ===============================
-// CARGAR HOTSPOTS
+// HOTSPOTS
 // ===============================
 
-async function cargarHotspots(horas = 24) {
+async function cargarHotspots(periodo) {
+  activePeriod = periodo;
+
+  setEstado(`Cargando puntos ${periodo}...`);
+
   try {
-    setInfoHotspots(`Cargando puntos calientes VIIRS · últimas ${textoPeriodo(horas)}...`);
+    const geojson = await fetchJson(HOTSPOTS_FILES[periodo]);
 
     hotspotsLayer.clearLayers();
 
-    const data = await cargarJSON(HOTSPOTS_FILES[horas]);
-    const features = data.features || [];
+    const layer = L.geoJSON(geojson, {
+      pane: "paneHotspots",
 
-    console.log(`Hotspots cargados ${textoPeriodo(horas)}:`, features.length);
-
-    const geojson = L.geoJSON(data, {
       pointToLayer: function (feature, latlng) {
-        const h = edadHoras(feature);
+        const props = feature.properties || {};
 
         return L.circleMarker(latlng, {
-          pane: "hotspotsPane",
-          radius: radioPorEdad(h),
-          color: "#111111",
-          weight: 1.7,
-          fillColor: colorPorEdad(h),
-          fillOpacity: 0.92,
-          opacity: 1
+          radius: radioPorConfianza(props),
+          color: "#1b1b1b",
+          weight: 1,
+          fillColor: colorPorAntiguedad(props),
+          fillOpacity: 0.88,
+          opacity: 1,
+          pane: "paneHotspots"
         });
       },
 
       onEachFeature: function (feature, layer) {
-        layer.bindPopup(crearPopupHotspot(feature));
+        layer.bindPopup(popupHotspot(feature));
       }
     });
 
-    geojson.addTo(hotspotsLayer);
+    layer.addTo(hotspotsLayer);
 
-    if (features.length > 0 && primeraCargaHotspots) {
-      const bounds = geojson.getBounds();
+    const total = geojson.features ? geojson.features.length : 0;
+    setEstado(`${total} puntos cargados · ${periodo}`);
 
-      if (bounds.isValid()) {
-        map.fitBounds(bounds.pad(0.25));
-      }
-
-      primeraCargaHotspots = false;
-    }
-
-    await cargarManifestHotspots(horas, features.length);
+    actualizarBotonesPeriodo(periodo);
 
   } catch (error) {
-    console.error("ERROR cargando hotspots:", error);
-    setInfoHotspots(`ERROR: ${error.message}`);
+    console.error(error);
+    setEstado(`Error cargando puntos ${periodo}`);
   }
 }
 
-// ===============================
-// MANIFEST HOTSPOTS
-// ===============================
-
-async function cargarManifestHotspots(horasSeleccionadas, totalFeatures) {
-  try {
-    const manifest = await cargarJSON(HOTSPOTS_MANIFEST);
-
-    const actualizado = manifest.actualizado_utc
-      ? new Date(manifest.actualizado_utc).toLocaleString("es-ES", {
-          timeZone: "Europe/Madrid",
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit"
-        })
-      : "sin fecha";
-
-    setInfoHotspots(
-      `Puntos calientes VIIRS · ${textoPeriodo(horasSeleccionadas)} · ${totalFeatures} detecciones · actualizado: ${actualizado}`
-    );
-
-  } catch (error) {
-    console.warn("No se pudo cargar manifest_hotspots.json", error);
-
-    setInfoHotspots(
-      `Puntos calientes VIIRS · ${textoPeriodo(horasSeleccionadas)} · ${totalFeatures} detecciones`
-    );
-  }
+function actualizarBotonesPeriodo(periodo) {
+  document.querySelectorAll(".period-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.period === periodo);
+  });
 }
 
-// ===============================
-// BOTONES 24 / 48 / 72 / 7D
-// ===============================
-
-document.querySelectorAll(".time-btn").forEach(btn => {
+document.querySelectorAll(".period-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll(".time-btn").forEach(b => {
-      b.classList.remove("active");
-    });
-
-    btn.classList.add("active");
-
-    const horas = Number(btn.dataset.hours);
-    cargarHotspots(horas);
+    cargarHotspots(btn.dataset.period);
   });
 });
 
+
 // ===============================
-// CAPAS RASTER
+// LÍMITE CV
 // ===============================
 
-async function cargarCapaRaster(nombre, imageUrl, boundsUrl, layerGroup, pane, opacity) {
+async function cargarLimiteCV() {
   try {
-    const bounds = await cargarBounds(boundsUrl);
+    const geojson = await fetchJson(LIMITE_CV);
 
-    const overlay = L.imageOverlay(urlNoCache(imageUrl), bounds, {
+    limiteLayer = L.geoJSON(geojson, {
+      pane: "paneLimite",
+      style: {
+        color: "#102a3a",
+        weight: 2,
+        opacity: 0.85,
+        fillOpacity: 0
+      }
+    }).addTo(map);
+
+    overlayLayers["Límite Comunitat Valenciana"] = limiteLayer;
+    layerControl.addOverlay(limiteLayer, "Límite Comunitat Valenciana");
+
+    try {
+      map.fitBounds(limiteLayer.getBounds(), {
+        padding: [20, 20]
+      });
+    } catch (e) {
+      console.warn("No se pudo ajustar al límite CV", e);
+    }
+
+  } catch (error) {
+    console.warn("No se pudo cargar límite CV", error);
+  }
+}
+
+
+// ===============================
+// RÁSTERES COMO IMAGEOVERLAY
+// ===============================
+
+function normalizarBounds(boundsJson) {
+  if (Array.isArray(boundsJson)) {
+    return boundsJson;
+  }
+
+  if (boundsJson.bounds) {
+    return boundsJson.bounds;
+  }
+
+  if (
+    boundsJson.south !== undefined &&
+    boundsJson.west !== undefined &&
+    boundsJson.north !== undefined &&
+    boundsJson.east !== undefined
+  ) {
+    return [
+      [boundsJson.south, boundsJson.west],
+      [boundsJson.north, boundsJson.east]
+    ];
+  }
+
+  throw new Error("Formato de bounds no reconocido");
+}
+
+async function cargarImageOverlay(nombre, imageUrl, boundsUrl, pane, opacity) {
+  try {
+    const boundsJson = await fetchJson(boundsUrl);
+    const bounds = normalizarBounds(boundsJson);
+
+    const layer = L.imageOverlay(urlNoCache(imageUrl), bounds, {
       pane: pane,
       opacity: opacity,
       interactive: false
     });
 
-    overlay.addTo(layerGroup);
+    layer._metvlcNombre = nombre;
 
-    console.log(`${nombre} cargado correctamente`);
+    layerControl.addOverlay(layer, nombre);
 
-    return overlay;
+    return layer;
 
   } catch (error) {
-    console.warn(`No se pudo cargar ${nombre}:`, error);
+    console.warn(`No se pudo cargar ${nombre}`, error);
     return null;
   }
 }
 
-async function cargarCombustible() {
-  combustibleOverlay = await cargarCapaRaster(
-    "modelo de combustible",
-    COMBUSTIBLE_IMAGE,
-    COMBUSTIBLE_BOUNDS,
-    combustibleLayer,
-    "combustiblePane",
-    combustibleOpacity
-  );
-}
-
-async function cargarPendiente() {
-  pendienteOverlay = await cargarCapaRaster(
-    "pendiente",
+async function cargarRasteres() {
+  pendienteLayer = await cargarImageOverlay(
+    "Pendiente",
     PENDIENTE_IMAGE,
     PENDIENTE_BOUNDS,
-    pendienteLayer,
-    "pendientePane",
-    pendienteOpacity
+    "panePendiente",
+    0.70
   );
-}
 
-async function cargarNDMI() {
-  ndmiOverlay = await cargarCapaRaster(
+  ndmiLayer = await cargarImageOverlay(
     "NDMI",
     NDMI_IMAGE,
     NDMI_BOUNDS,
-    ndmiLayer,
-    "ndmiPane",
-    ndmiOpacity
+    "paneNdmi",
+    0.72
+  );
+
+  combustibleLayer = await cargarImageOverlay(
+    "Modelo de combustible",
+    COMBUSTIBLE_IMAGE,
+    COMBUSTIBLE_BOUNDS,
+    "paneCombustible",
+    0.72
   );
 }
 
+
 // ===============================
-// CONTROL DE OPACIDADES
+// LEYENDAS
+// ===============================
+
+const legendHotspots = L.control({
+  position: "bottomleft"
+});
+
+legendHotspots.onAdd = function () {
+  const div = L.DomUtil.create("div", "legend");
+
+  div.innerHTML = `
+    <div class="legend-title">Puntos calientes</div>
+    <div class="legend-item"><span class="legend-color" style="background:#ff0000"></span>0–6 h</div>
+    <div class="legend-item"><span class="legend-color" style="background:#ff8c00"></span>6–24 h</div>
+    <div class="legend-item"><span class="legend-color" style="background:#ffd400"></span>24–48 h</div>
+    <div class="legend-item"><span class="legend-color" style="background:#7a7a7a"></span>48–72 h</div>
+    <div class="legend-item"><span class="legend-color" style="background:#6a3d9a"></span>72 h–7 días</div>
+  `;
+
+  L.DomEvent.disableClickPropagation(div);
+  L.DomEvent.disableScrollPropagation(div);
+
+  return div;
+};
+
+legendHotspots.addTo(map);
+
+async function crearLeyendaDesdeJson(titulo, url, posicion) {
+  try {
+    const data = await fetchJson(url);
+
+    const control = L.control({
+      position: posicion
+    });
+
+    control.onAdd = function () {
+      const div = L.DomUtil.create("div", "legend");
+
+      let html = `<div class="legend-title">${data.titulo || titulo}</div>`;
+
+      if (Array.isArray(data.items)) {
+        data.items.forEach(item => {
+          html += `
+            <div class="legend-item">
+              <span class="legend-color" style="background:${item.color || item.colour || "#999"}"></span>
+              ${item.label || item.nombre || item.name || ""}
+            </div>
+          `;
+        });
+      }
+
+      if (Array.isArray(data.grupos)) {
+        data.grupos.forEach(item => {
+          html += `
+            <div class="legend-item">
+              <span class="legend-color" style="background:${item.color || item.colour || "#999"}"></span>
+              ${item.label || item.nombre || item.name || ""}
+            </div>
+          `;
+        });
+      }
+
+      if (data.nota) {
+        html += `<div class="measure-small">${data.nota}</div>`;
+      }
+
+      div.innerHTML = html;
+
+      L.DomEvent.disableClickPropagation(div);
+      L.DomEvent.disableScrollPropagation(div);
+
+      return div;
+    };
+
+    return control;
+
+  } catch (error) {
+    console.warn(`No se pudo cargar leyenda ${titulo}`, error);
+    return null;
+  }
+}
+
+
+// ===============================
+// CONTROL DE OPACIDAD
 // ===============================
 
 const opacityControl = L.control({
@@ -516,387 +543,469 @@ const opacityControl = L.control({
 });
 
 opacityControl.onAdd = function () {
-  const div = L.DomUtil.create("div", "legend opacity-box");
+  const div = L.DomUtil.create("div", "opacity-control");
 
   div.innerHTML = `
-    <div class="legend-title">Opacidad capas</div>
+    <label>Opacidad capas</label>
 
-    <label style="display:block;margin-top:6px;">
-      Combustible
-      <input 
-        id="combustibleOpacity" 
-        type="range" 
-        min="0" 
-        max="1" 
-        step="0.05" 
-        value="${combustibleOpacity}"
-        style="width:130px;"
-      >
-    </label>
+    <div class="opacity-row">
+      <span>Pendiente</span>
+      <input id="opPendiente" type="range" min="0" max="1" step="0.05" value="0.70">
+    </div>
 
-    <label style="display:block;margin-top:6px;">
-      Pendiente
-      <input 
-        id="pendienteOpacity" 
-        type="range" 
-        min="0" 
-        max="1" 
-        step="0.05" 
-        value="${pendienteOpacity}"
-        style="width:130px;"
-      >
-    </label>
+    <div class="opacity-row">
+      <span>NDMI</span>
+      <input id="opNdmi" type="range" min="0" max="1" step="0.05" value="0.72">
+    </div>
 
-    <label style="display:block;margin-top:6px;">
-      NDMI
-      <input 
-        id="ndmiOpacity" 
-        type="range" 
-        min="0" 
-        max="1" 
-        step="0.05" 
-        value="${ndmiOpacity}"
-        style="width:130px;"
-      >
-    </label>
-  `;
-
-  L.DomEvent.disableClickPropagation(div);
-  L.DomEvent.disableScrollPropagation(div);
-
-  setTimeout(() => {
-    const combustibleInput = document.getElementById("combustibleOpacity");
-    const pendienteInput = document.getElementById("pendienteOpacity");
-    const ndmiInput = document.getElementById("ndmiOpacity");
-
-    if (combustibleInput) {
-      combustibleInput.addEventListener("input", e => {
-        combustibleOpacity = Number(e.target.value);
-
-        if (combustibleOverlay) {
-          combustibleOverlay.setOpacity(combustibleOpacity);
-        }
-      });
-    }
-
-    if (pendienteInput) {
-      pendienteInput.addEventListener("input", e => {
-        pendienteOpacity = Number(e.target.value);
-
-        if (pendienteOverlay) {
-          pendienteOverlay.setOpacity(pendienteOpacity);
-        }
-      });
-    }
-
-    if (ndmiInput) {
-      ndmiInput.addEventListener("input", e => {
-        ndmiOpacity = Number(e.target.value);
-
-        if (ndmiOverlay) {
-          ndmiOverlay.setOpacity(ndmiOpacity);
-        }
-      });
-    }
-  }, 300);
-
-  return div;
-};
-
-opacityControl.addTo(map);
-
-// ===============================
-// LEYENDA COMBUSTIBLE
-// ===============================
-
-function rgbaToCss(rgba) {
-  if (!rgba || rgba.length < 3) {
-    return "rgba(180,180,180,0.85)";
-  }
-
-  const r = rgba[0];
-  const g = rgba[1];
-  const b = rgba[2];
-  const a = rgba.length >= 4 ? rgba[3] / 255 : 1;
-
-  return `rgba(${r}, ${g}, ${b}, ${a})`;
-}
-
-function colorCombustible(item) {
-  if (item.color_rgba) return rgbaToCss(item.color_rgba);
-  if (item.rgba) return rgbaToCss(item.rgba);
-  if (item.color) return item.color;
-  if (item.fill) return item.fill;
-
-  return "#c17f35";
-}
-
-function nombreCombustible(item) {
-  return (
-    item.nombre ??
-    item.name ??
-    item.descripcion ??
-    item.description ??
-    item.modelo ??
-    item.codigo ??
-    item.valor ??
-    "Modelo combustible"
-  );
-}
-
-function extraerGruposCombustible(data) {
-  if (!data) return [];
-
-  if (Array.isArray(data.grupos)) return data.grupos;
-  if (Array.isArray(data.familias)) return data.familias;
-  if (Array.isArray(data.categorias)) return data.categorias;
-
-  if (Array.isArray(data.valores)) {
-    return [
-      {
-        nombre: "Modelos de combustible",
-        items: data.valores
-      }
-    ];
-  }
-
-  if (Array.isArray(data.items)) {
-    return [
-      {
-        nombre: "Modelos de combustible",
-        items: data.items
-      }
-    ];
-  }
-
-  if (Array.isArray(data.leyenda)) {
-    return [
-      {
-        nombre: "Modelos de combustible",
-        items: data.leyenda
-      }
-    ];
-  }
-
-  return [];
-}
-
-function renderGrupoCombustible(grupo, abierto = false) {
-  const nombreGrupo =
-    grupo.nombre ??
-    grupo.name ??
-    grupo.familia ??
-    grupo.categoria ??
-    "Grupo";
-
-  const items =
-    grupo.items ??
-    grupo.valores ??
-    grupo.modelos ??
-    grupo.clases ??
-    [];
-
-  if (!items.length) return "";
-
-  const openAttr = abierto ? "open" : "";
-
-  const htmlItems = items.map(item => {
-    const color = colorCombustible(item);
-    const nombre = nombreCombustible(item);
-
-    return `
-      <div class="legend-item">
-        <span class="legend-square" style="background:${color}"></span>
-        ${nombre}
-      </div>
-    `;
-  }).join("");
-
-  return `
-    <details ${openAttr} style="margin-top:5px;">
-      <summary style="font-weight:600; cursor:pointer;">${nombreGrupo}</summary>
-      <div style="margin-top:5px;">
-        ${htmlItems}
-      </div>
-    </details>
-  `;
-}
-
-async function cargarLeyendaCombustible() {
-  try {
-    const data = await cargarJSON(COMBUSTIBLE_LEYENDA);
-    const grupos = extraerGruposCombustible(data);
-
-    if (!grupos.length) {
-      return `
-        <div class="legend-item">
-          <span class="legend-square" style="background:#c17f35"></span>
-          Modelo de combustible
-        </div>
-      `;
-    }
-
-    return grupos.map((grupo, i) => {
-      return renderGrupoCombustible(grupo, i === 0);
-    }).join("");
-
-  } catch (error) {
-    console.warn("No se pudo cargar la leyenda de combustible:", error);
-
-    return `
-      <div class="legend-item">
-        <span class="legend-square" style="background:#c17f35"></span>
-        Modelo de combustible
-      </div>
-    `;
-  }
-}
-
-// ===============================
-// LEYENDA GENERAL
-// ===============================
-
-const legend = L.control({
-  position: "bottomleft"
-});
-
-legend.onAdd = function () {
-  const div = L.DomUtil.create("div", "legend main-legend");
-
-  div.innerHTML = `
-    <div class="legend-title">Leyenda del visor</div>
-
-    <details open style="margin-top:6px;">
-      <summary style="font-weight:700; cursor:pointer;">Puntos calientes VIIRS</summary>
-
-      <div style="margin-top:6px;">
-        <div class="legend-item">
-          <span class="legend-dot" style="background:#ff0000"></span>
-          0 - 6 h
-        </div>
-
-        <div class="legend-item">
-          <span class="legend-dot" style="background:#ff8c00"></span>
-          6 - 24 h
-        </div>
-
-        <div class="legend-item">
-          <span class="legend-dot" style="background:#ffd400"></span>
-          24 - 48 h
-        </div>
-
-        <div class="legend-item">
-          <span class="legend-dot" style="background:#7a7a7a"></span>
-          48 - 72 h
-        </div>
-
-        <div class="legend-item">
-          <span class="legend-dot" style="background:#6a3d9a"></span>
-          72 h - 7 días
-        </div>
-      </div>
-    </details>
-
-    <hr>
-
-    <details open>
-      <summary style="font-weight:700; cursor:pointer;">Pendiente media del terreno</summary>
-
-      <div style="margin-top:6px;">
-        <div class="legend-item">
-          <span class="legend-square" style="background:transparent; border:1px dashed #777;"></span>
-          ≤ 25 % · transparente
-        </div>
-
-        <div class="legend-item">
-          <span class="legend-square" style="background:#ffff00"></span>
-          &gt; 25 % y ≤ 30 %
-        </div>
-
-        <div class="legend-item">
-          <span class="legend-square" style="background:#ff8500"></span>
-          &gt; 30 % y ≤ 50 %
-        </div>
-
-        <div class="legend-item">
-          <span class="legend-square" style="background:#910000"></span>
-          &gt; 50 %
-        </div>
-      </div>
-    </details>
-
-    <hr>
-
-    <details open>
-      <summary style="font-weight:700; cursor:pointer;">NDMI Comunitat Valenciana</summary>
-
-      <div style="margin-top:6px;">
-        <div style="
-          width:180px;
-          height:13px;
-          border-radius:6px;
-          border:1px solid #777;
-          background:linear-gradient(to right, #ff7f00, #ffff33, #00bfff, #0033ff);
-          margin:5px 0 6px 0;
-        "></div>
-
-        <div style="
-          display:flex;
-          justify-content:space-between;
-          font-size:11px;
-          gap:8px;
-        ">
-          <span>Más seco</span>
-          <span>Más húmedo</span>
-        </div>
-      </div>
-    </details>
-
-    <hr>
-
-    <details>
-      <summary style="font-weight:700; cursor:pointer;">Modelo de combustible</summary>
-
-      <div id="leyendaCombustible" style="
-        margin-top:6px;
-        max-height:210px;
-        overflow-y:auto;
-        padding-right:4px;
-      ">
-        Cargando leyenda...
-      </div>
-    </details>
-
-    <hr>
-
-    <div class="legend-item">
-      <span class="legend-line"></span>
-      Límite Comunitat Valenciana
+    <div class="opacity-row">
+      <span>Combustible</span>
+      <input id="opCombustible" type="range" min="0" max="1" step="0.05" value="0.72">
     </div>
   `;
 
   L.DomEvent.disableClickPropagation(div);
   L.DomEvent.disableScrollPropagation(div);
 
-  setTimeout(async () => {
-    const contenedor = document.getElementById("leyendaCombustible");
+  return div;
+};
 
-    if (contenedor) {
-      contenedor.innerHTML = await cargarLeyendaCombustible();
-    }
-  }, 250);
+opacityControl.addTo(map);
+
+function activarControlesOpacidad() {
+  const opPendiente = document.getElementById("opPendiente");
+  const opNdmi = document.getElementById("opNdmi");
+  const opCombustible = document.getElementById("opCombustible");
+
+  if (opPendiente) {
+    opPendiente.addEventListener("input", e => {
+      if (pendienteLayer) pendienteLayer.setOpacity(Number(e.target.value));
+    });
+  }
+
+  if (opNdmi) {
+    opNdmi.addEventListener("input", e => {
+      if (ndmiLayer) ndmiLayer.setOpacity(Number(e.target.value));
+    });
+  }
+
+  if (opCombustible) {
+    opCombustible.addEventListener("input", e => {
+      if (combustibleLayer) combustibleLayer.setOpacity(Number(e.target.value));
+    });
+  }
+}
+
+
+// ===============================
+// DESCARGAS DIRECTAS
+// ===============================
+
+const descargaControl = L.control({
+  position: "topleft"
+});
+
+descargaControl.onAdd = function () {
+  const div = L.DomUtil.create("div", "legend");
+
+  div.innerHTML = `
+    <div class="legend-title">Descargas</div>
+    <div style="display:grid;gap:6px;">
+      <button class="download-btn" data-file="24h">GeoJSON 24 h</button>
+      <button class="download-btn" data-file="48h">GeoJSON 48 h</button>
+      <button class="download-btn" data-file="72h">GeoJSON 72 h</button>
+      <button class="download-btn" data-file="7d">GeoJSON 7 días</button>
+    </div>
+  `;
+
+  L.DomEvent.disableClickPropagation(div);
+  L.DomEvent.disableScrollPropagation(div);
 
   return div;
 };
 
-legend.addTo(map);
+descargaControl.addTo(map);
+
+setTimeout(() => {
+  document.querySelectorAll(".download-btn").forEach(btn => {
+    btn.style.padding = "6px 9px";
+    btn.style.border = "none";
+    btn.style.borderRadius = "7px";
+    btn.style.background = "#0b4f75";
+    btn.style.color = "#fff";
+    btn.style.fontWeight = "700";
+    btn.style.cursor = "pointer";
+
+    btn.addEventListener("click", () => {
+      const periodo = btn.dataset.file;
+      const a = document.createElement("a");
+      a.href = HOTSPOTS_FILES[periodo];
+      a.download = `hotspots_${periodo}.geojson`;
+      a.target = "_blank";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  });
+}, 500);
+
+
+// ============================================================
+// HERRAMIENTA DE DIBUJO DE PERÍMETROS
+// ============================================================
+
+const perimetrosDibujados = new L.FeatureGroup();
+map.addLayer(perimetrosDibujados);
+
+// Traducción básica Leaflet.draw
+L.drawLocal.draw.toolbar.buttons.polygon = "Dibujar perímetro";
+L.drawLocal.draw.toolbar.actions.title = "Cancelar dibujo";
+L.drawLocal.draw.toolbar.actions.text = "Cancelar";
+L.drawLocal.draw.toolbar.finish.title = "Finalizar perímetro";
+L.drawLocal.draw.toolbar.finish.text = "Finalizar";
+L.drawLocal.draw.toolbar.undo.title = "Eliminar último punto";
+L.drawLocal.draw.toolbar.undo.text = "Eliminar último punto";
+
+L.drawLocal.draw.handlers.polygon.tooltip.start = "Haz clic para empezar el perímetro";
+L.drawLocal.draw.handlers.polygon.tooltip.cont = "Haz clic para continuar dibujando";
+L.drawLocal.draw.handlers.polygon.tooltip.end = "Haz clic en el primer punto para cerrar el perímetro";
+
+L.drawLocal.edit.toolbar.buttons.edit = "Editar perímetro";
+L.drawLocal.edit.toolbar.buttons.remove = "Borrar perímetro";
+L.drawLocal.edit.toolbar.actions.save.title = "Guardar cambios";
+L.drawLocal.edit.toolbar.actions.save.text = "Guardar";
+L.drawLocal.edit.toolbar.actions.cancel.title = "Cancelar edición";
+L.drawLocal.edit.toolbar.actions.cancel.text = "Cancelar";
+L.drawLocal.edit.toolbar.actions.clearAll.title = "Borrar todos";
+L.drawLocal.edit.toolbar.actions.clearAll.text = "Borrar todos";
+
+const drawControl = new L.Control.Draw({
+  position: "topleft",
+
+  draw: {
+    polygon: {
+      allowIntersection: false,
+      showArea: true,
+      shapeOptions: {
+        color: "#ff0000",
+        weight: 3,
+        opacity: 1,
+        fillColor: "#ff0000",
+        fillOpacity: 0.12,
+        pane: "paneDibujo"
+      }
+    },
+
+    polyline: false,
+    rectangle: false,
+    circle: false,
+    circlemarker: false,
+    marker: false
+  },
+
+  edit: {
+    featureGroup: perimetrosDibujados,
+    edit: true,
+    remove: true
+  }
+});
+
+map.addControl(drawControl);
+
 
 // ===============================
-// INICIO
+// PANEL DE MEDICIÓN
 // ===============================
 
-cargarLimiteCV();
-cargarHotspots(24);
-cargarCombustible();
-cargarPendiente();
-cargarNDMI();
+const medicionControl = L.control({
+  position: "bottomright"
+});
+
+medicionControl.onAdd = function () {
+  const div = L.DomUtil.create("div", "legend measure-box");
+
+  div.id = "panelMedicionPerimetro";
+
+  div.innerHTML = `
+    <div class="legend-title">Perímetro dibujado</div>
+    <div>Dibuja un polígono para calcular superficie y perímetro.</div>
+  `;
+
+  L.DomEvent.disableClickPropagation(div);
+  L.DomEvent.disableScrollPropagation(div);
+
+  return div;
+};
+
+medicionControl.addTo(map);
+
+function formatoSuperficie(m2) {
+  const ha = m2 / 10000;
+  const km2 = m2 / 1000000;
+
+  if (ha >= 100) {
+    return `${ha.toFixed(1)} ha · ${km2.toFixed(2)} km²`;
+  }
+
+  return `${ha.toFixed(2)} ha · ${m2.toFixed(0)} m²`;
+}
+
+function formatoPerimetro(km) {
+  if (km >= 1) {
+    return `${km.toFixed(2)} km`;
+  }
+
+  return `${(km * 1000).toFixed(0)} m`;
+}
+
+function calcularMedicion(layer) {
+  const geojson = layer.toGeoJSON();
+
+  const areaM2 = turf.area(geojson);
+  const linea = turf.polygonToLine(geojson);
+  const perimetroKm = turf.length(linea, {
+    units: "kilometers"
+  });
+
+  return {
+    areaM2,
+    perimetroKm,
+    geojson
+  };
+}
+
+function actualizarPanelMedicion(layer) {
+  const panel = document.getElementById("panelMedicionPerimetro");
+
+  if (!panel) return;
+
+  const medicion = calcularMedicion(layer);
+
+  panel.innerHTML = `
+    <div class="legend-title">Perímetro dibujado</div>
+
+    <div class="legend-item">
+      <strong>Superficie:</strong>&nbsp; ${formatoSuperficie(medicion.areaM2)}
+    </div>
+
+    <div class="legend-item">
+      <strong>Perímetro:</strong>&nbsp; ${formatoPerimetro(medicion.perimetroKm)}
+    </div>
+
+    <div style="margin-top:8px;display:grid;gap:6px;">
+      <button id="descargarPerimetroKml">Descargar KML</button>
+      <button id="descargarPerimetroGeojson">Descargar GeoJSON</button>
+    </div>
+
+    <div class="measure-small">
+      Cálculo automático orientativo sobre el polígono dibujado.
+    </div>
+  `;
+
+  setTimeout(() => {
+    const botonKml = document.getElementById("descargarPerimetroKml");
+    const botonGeojson = document.getElementById("descargarPerimetroGeojson");
+
+    if (botonKml) {
+      botonKml.onclick = function () {
+        descargarPerimetroKML(layer, medicion);
+      };
+    }
+
+    if (botonGeojson) {
+      botonGeojson.onclick = function () {
+        descargarPerimetroGeoJSON(layer, medicion);
+      };
+    }
+  }, 100);
+}
+
+function limpiarPanelMedicion() {
+  const panel = document.getElementById("panelMedicionPerimetro");
+
+  if (!panel) return;
+
+  panel.innerHTML = `
+    <div class="legend-title">Perímetro dibujado</div>
+    <div>Dibuja un polígono para calcular superficie y perímetro.</div>
+  `;
+}
+
+
+// ===============================
+// EVENTOS DIBUJO
+// ===============================
+
+map.on(L.Draw.Event.CREATED, function (event) {
+  const layer = event.layer;
+
+  // Un único perímetro activo cada vez
+  perimetrosDibujados.clearLayers();
+  perimetrosDibujados.addLayer(layer);
+
+  actualizarPanelMedicion(layer);
+
+  const medicion = calcularMedicion(layer);
+
+  layer.bindPopup(`
+    <strong>Perímetro dibujado</strong><br>
+    Superficie: ${formatoSuperficie(medicion.areaM2)}<br>
+    Perímetro: ${formatoPerimetro(medicion.perimetroKm)}
+  `).openPopup();
+});
+
+map.on(L.Draw.Event.EDITED, function (event) {
+  event.layers.eachLayer(function (layer) {
+    actualizarPanelMedicion(layer);
+
+    const medicion = calcularMedicion(layer);
+
+    layer.bindPopup(`
+      <strong>Perímetro dibujado</strong><br>
+      Superficie: ${formatoSuperficie(medicion.areaM2)}<br>
+      Perímetro: ${formatoPerimetro(medicion.perimetroKm)}
+    `);
+  });
+});
+
+map.on(L.Draw.Event.DELETED, function () {
+  limpiarPanelMedicion();
+});
+
+
+// ===============================
+// EXPORTAR KML Y GEOJSON
+// ===============================
+
+function descargarTexto(nombreArchivo, contenido, mimeType) {
+  const blob = new Blob([contenido], {
+    type: mimeType
+  });
+
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = nombreArchivo;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  URL.revokeObjectURL(url);
+}
+
+function descargarPerimetroKML(layer, medicion) {
+  const geojson = layer.toGeoJSON();
+
+  if (!geojson.geometry || geojson.geometry.type !== "Polygon") {
+    alert("Solo se puede exportar un polígono.");
+    return;
+  }
+
+  const coords = geojson.geometry.coordinates[0];
+
+  const coordText = coords.map(coord => {
+    const lon = coord[0];
+    const lat = coord[1];
+    return `${lon},${lat},0`;
+  }).join(" ");
+
+  const fecha = new Date().toISOString();
+
+  const kml = `<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Perímetro dibujado MetVlc</name>
+
+  <Style id="perimetroMetVlc">
+    <LineStyle>
+      <color>ff0000ff</color>
+      <width>4</width>
+    </LineStyle>
+    <PolyStyle>
+      <color>330000ff</color>
+      <fill>1</fill>
+      <outline>1</outline>
+    </PolyStyle>
+  </Style>
+
+  <Placemark>
+    <name>Perímetro dibujado</name>
+    <description>
+      Superficie: ${formatoSuperficie(medicion.areaM2)}
+      Perímetro: ${formatoPerimetro(medicion.perimetroKm)}
+      Fecha: ${fecha}
+      Generado desde visor MetVlc.
+    </description>
+    <styleUrl>#perimetroMetVlc</styleUrl>
+    <Polygon>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>
+            ${coordText}
+          </coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+</Document>
+</kml>`;
+
+  descargarTexto(
+    "perimetro_dibujado_metvlc.kml",
+    kml,
+    "application/vnd.google-earth.kml+xml"
+  );
+}
+
+function descargarPerimetroGeoJSON(layer, medicion) {
+  const geojson = layer.toGeoJSON();
+
+  geojson.properties = {
+    nombre: "Perímetro dibujado MetVlc",
+    superficie_m2: Number(medicion.areaM2.toFixed(2)),
+    superficie_ha: Number((medicion.areaM2 / 10000).toFixed(4)),
+    perimetro_km: Number(medicion.perimetroKm.toFixed(4)),
+    generado_utc: new Date().toISOString()
+  };
+
+  const featureCollection = {
+    type: "FeatureCollection",
+    features: [geojson]
+  };
+
+  descargarTexto(
+    "perimetro_dibujado_metvlc.geojson",
+    JSON.stringify(featureCollection, null, 2),
+    "application/geo+json"
+  );
+}
+
+
+// ===============================
+// ARRANQUE
+// ===============================
+
+async function init() {
+  setEstado("Inicializando visor...");
+
+  await cargarLimiteCV();
+  await cargarRasteres();
+
+  activarControlesOpacidad();
+
+  cargarHotspots(activePeriod);
+
+  // Cargar manifest solo para mostrar fecha de actualización si existe
+  try {
+    const manifest = await fetchJson(HOTSPOTS_MANIFEST);
+
+    if (manifest.actualizado_utc) {
+      console.log("Manifest hotspots:", manifest);
+    }
+  } catch (error) {
+    console.warn("No se pudo cargar manifest", error);
+  }
+}
+
+init();
