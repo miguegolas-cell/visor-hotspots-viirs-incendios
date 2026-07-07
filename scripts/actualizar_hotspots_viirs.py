@@ -13,7 +13,7 @@ from xml.etree import ElementTree as ET
 
 import shapefile
 from shapely.geometry import Point, shape as shapely_shape
-from shapely.ops import unary_union
+from shapely.validation import make_valid
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]
@@ -128,6 +128,41 @@ def descargar_archivo(url, destino, intentos=5):
     raise RuntimeError(f"No se pudo descargar {url} después de {intentos} intentos. Último error: {ultimo_error}")
 
 
+def extraer_poligonos(geom):
+    if geom is None or geom.is_empty:
+        return []
+
+    if geom.geom_type in ("Polygon", "MultiPolygon"):
+        return [geom]
+
+    if geom.geom_type == "GeometryCollection":
+        salida = []
+        for parte in geom.geoms:
+            salida.extend(extraer_poligonos(parte))
+        return salida
+
+    return []
+
+
+def limpiar_geometria(geom):
+    if geom is None or geom.is_empty:
+        return None
+
+    try:
+        if not geom.is_valid:
+            geom = make_valid(geom)
+    except Exception as e:
+        print(f"Aviso: make_valid falló; intento buffer(0). Detalle: {e}")
+
+    try:
+        if geom is not None and not geom.is_empty and not geom.is_valid:
+            geom = geom.buffer(0)
+    except Exception as e:
+        print(f"Aviso: buffer(0) falló en una geometría. Detalle: {e}")
+
+    return geom
+
+
 def cargar_geometria_cv():
     if not LIMITE_CV_GEOJSON.exists():
         raise RuntimeError(
@@ -135,33 +170,61 @@ def cargar_geometria_cv():
         )
 
     data = json.loads(LIMITE_CV_GEOJSON.read_text(encoding="utf-8"))
-    geoms = []
+
+    geoms_raw = []
 
     if data.get("type") == "FeatureCollection":
         for feature in data.get("features", []):
             if feature.get("geometry"):
-                geoms.append(shapely_shape(feature["geometry"]))
+                geoms_raw.append(shapely_shape(feature["geometry"]))
     elif data.get("type") == "Feature":
-        geoms.append(shapely_shape(data["geometry"]))
+        geoms_raw.append(shapely_shape(data["geometry"]))
     else:
-        geoms.append(shapely_shape(data))
+        geoms_raw.append(shapely_shape(data))
 
-    geom_cv = unary_union(geoms).buffer(0)
+    geoms_cv = []
 
-    if geom_cv.is_empty:
-        raise RuntimeError("La geometría de la Comunitat Valenciana está vacía")
+    for geom in geoms_raw:
+        geom = limpiar_geometria(geom)
+        for parte in extraer_poligonos(geom):
+            parte = limpiar_geometria(parte)
+            if parte is not None and not parte.is_empty:
+                geoms_cv.append(parte)
+
+    if not geoms_cv:
+        raise RuntimeError("El GeoJSON de la Comunitat Valenciana no contiene polígonos válidos")
+
+    lon_min = min(g.bounds[0] for g in geoms_cv)
+    lat_min = min(g.bounds[1] for g in geoms_cv)
+    lon_max = max(g.bounds[2] for g in geoms_cv)
+    lat_max = max(g.bounds[3] for g in geoms_cv)
 
     print("Límite Comunitat Valenciana cargado correctamente")
-    print(f"Bounds CV: {geom_cv.bounds}")
+    print(f"Geometrías válidas usadas: {len(geoms_cv)}")
+    print(f"Bounds CV: {(lon_min, lat_min, lon_max, lat_max)}")
 
-    return geom_cv
+    return geoms_cv
 
 
-def punto_dentro_cv(lon, lat, geom_cv):
+def punto_dentro_cv(lon, lat, geoms_cv):
     if not in_bbox(lon, lat):
         return False
-    p = Point(lon, lat)
-    return geom_cv.contains(p) or geom_cv.touches(p)
+
+    punto = Point(lon, lat)
+
+    for geom in geoms_cv:
+        try:
+            if geom.contains(punto) or geom.touches(punto):
+                return True
+        except Exception:
+            try:
+                geom_ok = limpiar_geometria(geom)
+                if geom_ok and (geom_ok.contains(punto) or geom_ok.touches(punto)):
+                    return True
+            except Exception:
+                continue
+
+    return False
 
 
 def parse_fecha_viirs(props):
@@ -317,7 +380,7 @@ def placemark_to_properties(pm, ns):
     return props
 
 
-def leer_kml_viirs(source, periodo, geom_cv):
+def leer_kml_viirs(source, periodo, geoms_cv):
     source_id, satelite, instrumento, url = source
 
     with tempfile.TemporaryDirectory() as tmp:
@@ -341,7 +404,7 @@ def leer_kml_viirs(source, periodo, geom_cv):
             if in_bbox(lon, lat):
                 dentro_bbox += 1
 
-            if not punto_dentro_cv(lon, lat, geom_cv):
+            if not punto_dentro_cv(lon, lat, geoms_cv):
                 continue
 
             props = placemark_to_properties(pm, ns)
@@ -371,7 +434,7 @@ def buscar_shp(carpeta):
     return shp_files[0]
 
 
-def leer_zip_viirs(source, periodo, geom_cv):
+def leer_zip_viirs(source, periodo, geoms_cv):
     source_id, satelite, instrumento, url = source
 
     with tempfile.TemporaryDirectory() as tmp:
@@ -415,7 +478,7 @@ def leer_zip_viirs(source, periodo, geom_cv):
             if in_bbox(lon, lat):
                 dentro_bbox += 1
 
-            if not punto_dentro_cv(lon, lat, geom_cv):
+            if not punto_dentro_cv(lon, lat, geoms_cv):
                 continue
 
             features.append(crear_feature(
@@ -438,19 +501,19 @@ def leer_zip_viirs(source, periodo, geom_cv):
 
 def main():
     ref_time = now_utc()
-    geom_cv = cargar_geometria_cv()
+    geoms_cv = cargar_geometria_cv()
 
     features_24h = []
     for source in KML_SOURCES_24H:
-        features_24h.extend(leer_kml_viirs(source, "24h", geom_cv))
+        features_24h.extend(leer_kml_viirs(source, "24h", geoms_cv))
 
     features_48h = []
     for source in KML_SOURCES_48H:
-        features_48h.extend(leer_kml_viirs(source, "48h", geom_cv))
+        features_48h.extend(leer_kml_viirs(source, "48h", geoms_cv))
 
     features_7d = []
     for source in ZIP_SOURCES_7D:
-        features_7d.extend(leer_zip_viirs(source, "7d", geom_cv))
+        features_7d.extend(leer_zip_viirs(source, "7d", geoms_cv))
 
     features_24h = deduplicar_features(features_24h)
     features_48h = deduplicar_features(features_48h)
@@ -491,7 +554,8 @@ def main():
         "nota": (
             "24h y 48h se descargan desde KML de FIRMS para Suomi-NPP, NOAA-20 y NOAA-21. "
             "7d se descarga desde shapefile ZIP para los mismos satélites. "
-            "Todos los puntos se filtran al polígono de la Comunitat Valenciana."
+            "Todos los puntos se filtran al polígono de la Comunitat Valenciana. "
+            "El límite se valida con make_valid para evitar errores de topología."
         )
     }
 
