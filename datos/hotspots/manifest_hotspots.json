@@ -1,24 +1,44 @@
 {
-  "producto": "Puntos calientes NASA FIRMS · SUOMI-NPP VIIRS C2",
-  "fuente_24h": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/shapes/zips/SUOMI_VIIRS_C2_Europe_24h.zip",
-  "fuente_48h": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/shapes/zips/SUOMI_VIIRS_C2_Europe_48h.zip",
-  "fuente_7d": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/shapes/zips/SUOMI_VIIRS_C2_Europe_7d.zip",
-  "actualizado_utc": "2026-07-06T10:25:10+00:00",
-  "bbox_valencia": {
-    "lon_min": -1.7,
-    "lat_min": 38.6,
-    "lon_max": 0.05,
-    "lat_max": 40.25
+  "producto": "Puntos calientes NASA FIRMS · VIIRS C2 multi-satélite",
+  "ambito": "Comunitat Valenciana",
+  "satellites": [
+    "Suomi-NPP",
+    "NOAA-20",
+    "NOAA-21"
+  ],
+  "instrument": "VIIRS",
+  "actualizado_utc": "2026-07-07T10:59:31+00:00",
+  "limite_usado": "datos/limites/comunitat_valenciana.geojson",
+  "bbox_cv": {
+    "lon_min": -1.6,
+    "lat_min": 37.8,
+    "lon_max": 0.8,
+    "lat_max": 40.9
   },
-  "hotspots_24h": 13,
-  "hotspots_48h": 13,
-  "hotspots_72h": 13,
-  "hotspots_7d": 17,
+  "hotspots_24h": 25,
+  "hotspots_48h": 50,
+  "hotspots_72h": 54,
+  "hotspots_7d": 74,
+  "fuentes_24h": [
+    "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/kml/SUOMI_VIIRS_C2_Europe_24h.kml",
+    "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-20-viirs-c2/kml/J1_VIIRS_C2_Europe_24h.kml",
+    "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-21-viirs-c2/kml/J2_VIIRS_C2_Europe_24h.kml"
+  ],
+  "fuentes_48h": [
+    "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/kml/SUOMI_VIIRS_C2_Europe_48h.kml",
+    "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-20-viirs-c2/kml/J1_VIIRS_C2_Europe_48h.kml",
+    "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-21-viirs-c2/kml/J2_VIIRS_C2_Europe_48h.kml"
+  ],
+  "fuentes_7d": [
+    "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/shapes/zips/SUOMI_VIIRS_C2_Europe_7d.zip",
+    "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-20-viirs-c2/shapes/zips/J1_VIIRS_C2_Europe_7d.zip",
+    "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-21-viirs-c2/shapes/zips/J2_VIIRS_C2_Europe_7d.zip"
+  ],
   "archivos": [
     "hotspots_24h.geojson",
     "hotspots_48h.geojson",
     "hotspots_72h.geojson",
     "hotspots_7d.geojson"
   ],
-  "nota": "Los ZIP de FIRMS contienen shapefiles de puntos calientes VIIRS. Este visor filtra la zona de la provincia de Valencia mediante BBOX."
+  "nota": "24h y 48h se descargan desde KML de FIRMS para Suomi-NPP, NOAA-20 y NOAA-21. 7d se descarga desde shapefile ZIP para los mismos satélites. Todos los puntos se filtran al polígono de la Comunitat Valenciana. El límite se valida con make_valid para evitar errores de topología."
 }
