@@ -658,7 +658,7 @@ function activarControlesOpacidad() {
 
 
 // ===============================
-// DESCARGAS DIRECTAS
+// DESCARGAS DIRECTAS EN KML
 // ===============================
 
 const descargaControl = L.control({
@@ -669,12 +669,15 @@ descargaControl.onAdd = function () {
   const div = L.DomUtil.create("div", "legend");
 
   div.innerHTML = `
-    <div class="legend-title">Descargas</div>
+    <div class="legend-title">Descargas KML</div>
     <div style="display:grid;gap:6px;">
-      <button class="download-btn" data-file="24h">GeoJSON 24 h</button>
-      <button class="download-btn" data-file="48h">GeoJSON 48 h</button>
-      <button class="download-btn" data-file="72h">GeoJSON 72 h</button>
-      <button class="download-btn" data-file="7d">GeoJSON 7 días</button>
+      <button class="download-btn" data-file="24h">KML 24 h</button>
+      <button class="download-btn" data-file="48h">KML 48 h</button>
+      <button class="download-btn" data-file="72h">KML 72 h</button>
+      <button class="download-btn" data-file="7d">KML 7 días</button>
+    </div>
+    <div class="measure-small">
+      Formato compatible con Google Earth.
     </div>
   `;
 
@@ -685,6 +688,194 @@ descargaControl.onAdd = function () {
 };
 
 descargaControl.addTo(map);
+
+function escapeXml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&apos;");
+}
+
+function colorKmlPorAntiguedad(props) {
+  const colorHex = colorPorAntiguedad(props).replace("#", "").toLowerCase();
+
+  // KML usa formato AABBGGRR, no RRGGBB
+  const rr = colorHex.substring(0, 2);
+  const gg = colorHex.substring(2, 4);
+  const bb = colorHex.substring(4, 6);
+
+  return `ff${bb}${gg}${rr}`;
+}
+
+function descripcionKmlHotspot(props) {
+  const sat = getProp(props, ["metvlc_satellite", "SATELLITE", "satellite"], "VIIRS");
+  const sensor = getProp(props, ["metvlc_instrument", "INSTRUMENT", "instrument"], "VIIRS");
+  const fecha = getProp(props, ["metvlc_time_utc"], null);
+  const acqDate = getProp(props, ["ACQ_DATE", "acq_date"], "");
+  const acqTime = getProp(props, ["ACQ_TIME", "acq_time"], "");
+  const confianza = getProp(props, ["CONFIDENCE", "confidence"], "—");
+  const frp = getProp(props, ["FRP", "frp"], "—");
+  const daynight = getProp(props, ["DAYNIGHT", "daynight"], "—");
+  const fuente = getProp(props, ["metvlc_fuente"], "NASA FIRMS");
+
+  let fechaTexto = "Sin fecha";
+
+  if (fecha) {
+    fechaTexto = formatoFecha(fecha);
+  } else if (acqDate) {
+    fechaTexto = `${acqDate} ${acqTime || ""} UTC`;
+  }
+
+  return `
+    <![CDATA[
+      <strong>Punto caliente VIIRS</strong><br>
+      <strong>Satélite:</strong> ${sat}<br>
+      <strong>Sensor:</strong> ${sensor}<br>
+      <strong>Fecha:</strong> ${fechaTexto}<br>
+      <strong>Confianza:</strong> ${confianza}<br>
+      <strong>FRP:</strong> ${frp}<br>
+      <strong>Día/noche:</strong> ${daynight}<br>
+      <strong>Fuente:</strong> ${fuente}
+    ]]>
+  `;
+}
+
+function nombreKmlHotspot(props, index) {
+  const sat = getProp(props, ["metvlc_satellite", "SATELLITE", "satellite"], "VIIRS");
+  const fecha = getProp(props, ["metvlc_time_utc"], null);
+  const acqDate = getProp(props, ["ACQ_DATE", "acq_date"], "");
+  const acqTime = getProp(props, ["ACQ_TIME", "acq_time"], "");
+
+  let fechaCorta = "";
+
+  if (fecha) {
+    const d = new Date(fecha);
+    if (!Number.isNaN(d.getTime())) {
+      fechaCorta = d.toISOString().slice(0, 16).replace("T", " ");
+    }
+  } else if (acqDate) {
+    fechaCorta = `${acqDate} ${acqTime || ""}`;
+  }
+
+  return `${sat} · ${fechaCorta || "Punto"} · ${index + 1}`;
+}
+
+function geojsonHotspotsToKml(geojson, periodo) {
+  const features = geojson.features || [];
+
+  const estilosUsados = {
+    reciente: "ff0000ff",
+    naranja: "ff008cff",
+    amarillo: "ff00d4ff",
+    gris: "ff7a7a7a",
+    morado: "ff9a3d6a"
+  };
+
+  let placemarks = "";
+
+  features.forEach((feature, index) => {
+    if (!feature.geometry || feature.geometry.type !== "Point") return;
+
+    const coords = feature.geometry.coordinates;
+    const lon = coords[0];
+    const lat = coords[1];
+
+    if (lon === undefined || lat === undefined) return;
+
+    const props = feature.properties || {};
+    const colorKml = colorKmlPorAntiguedad(props);
+    const styleId = `hotspot_${index}`;
+
+    placemarks += `
+      <Style id="${styleId}">
+        <IconStyle>
+          <color>${colorKml}</color>
+          <scale>0.9</scale>
+          <Icon>
+            <href>http://maps.google.com/mapfiles/kml/shapes/firedept.png</href>
+          </Icon>
+        </IconStyle>
+        <LabelStyle>
+          <scale>0</scale>
+        </LabelStyle>
+      </Style>
+
+      <Placemark>
+        <name>${escapeXml(nombreKmlHotspot(props, index))}</name>
+        <description>${descripcionKmlHotspot(props)}</description>
+        <styleUrl>#${styleId}</styleUrl>
+        <Point>
+          <coordinates>${lon},${lat},0</coordinates>
+        </Point>
+      </Placemark>
+    `;
+  });
+
+  const fecha = new Date().toISOString();
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>MetVlc · puntos calientes VIIRS ${escapeXml(periodo)}</name>
+  <description>
+    <![CDATA[
+      Puntos calientes NASA FIRMS VIIRS filtrados a la Comunitat Valenciana.<br>
+      Periodo: ${escapeXml(periodo)}<br>
+      Total de puntos: ${features.length}<br>
+      Generado desde visor MetVlc: ${fecha}<br>
+      Los puntos son detecciones térmicas satelitales aproximadas.
+    ]]>
+  </description>
+
+  <Folder>
+    <name>Puntos calientes ${escapeXml(periodo)}</name>
+    ${placemarks}
+  </Folder>
+</Document>
+</kml>`;
+}
+
+function descargarTexto(nombreArchivo, contenido, mimeType) {
+  const blob = new Blob([contenido], {
+    type: mimeType
+  });
+
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = nombreArchivo;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  URL.revokeObjectURL(url);
+}
+
+async function descargarHotspotsKML(periodo) {
+  try {
+    setEstado(`Preparando KML ${periodo}...`);
+
+    const geojson = await fetchJson(HOTSPOTS_FILES[periodo]);
+    const kml = geojsonHotspotsToKml(geojson, periodo);
+
+    descargarTexto(
+      `hotspots_viirs_${periodo}_metvlc.kml`,
+      kml,
+      "application/vnd.google-earth.kml+xml"
+    );
+
+    const total = geojson.features ? geojson.features.length : 0;
+    setEstado(`KML ${periodo} descargado · ${total} puntos`);
+
+  } catch (error) {
+    console.error(error);
+    setEstado(`Error generando KML ${periodo}`);
+    alert(`No se pudo generar el KML ${periodo}.`);
+  }
+}
 
 setTimeout(() => {
   document.querySelectorAll(".download-btn").forEach(btn => {
@@ -698,13 +889,7 @@ setTimeout(() => {
 
     btn.addEventListener("click", () => {
       const periodo = btn.dataset.file;
-      const a = document.createElement("a");
-      a.href = HOTSPOTS_FILES[periodo];
-      a.download = `hotspots_${periodo}.geojson`;
-      a.target = "_blank";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      descargarHotspotsKML(periodo);
     });
   });
 }, 500);
@@ -937,22 +1122,6 @@ map.on(L.Draw.Event.DELETED, function () {
 // EXPORTAR KML Y GEOJSON
 // ===============================
 
-function descargarTexto(nombreArchivo, contenido, mimeType) {
-  const blob = new Blob([contenido], {
-    type: mimeType
-  });
-
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = nombreArchivo;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-
-  URL.revokeObjectURL(url);
-}
 
 function descargarPerimetroKML(layer, medicion) {
   const geojson = layer.toGeoJSON();
