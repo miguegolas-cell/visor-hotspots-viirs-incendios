@@ -7,7 +7,7 @@
     "NOAA-21"
   ],
   "instrument": "VIIRS",
-  "actualizado_utc": "2026-07-21T13:01:05+00:00",
+  "actualizado_utc": "2026-07-21T19:01:06+00:00",
   "limite_usado": "datos/limites/comunitat_valenciana.geojson",
   "bbox_cv": {
     "lon_min": -1.6,
@@ -15,10 +15,10 @@
     "lon_max": 0.8,
     "lat_max": 40.9
   },
-  "hotspots_24h": 1,
-  "hotspots_48h": 1,
-  "hotspots_72h": 3,
-  "hotspots_7d": 14,
+  "hotspots_24h": 5,
+  "hotspots_48h": 5,
+  "hotspots_72h": 5,
+  "hotspots_7d": 18,
   "fuentes_24h": [
     "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/kml/SUOMI_VIIRS_C2_Europe_24h.kml",
     "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-20-viirs-c2/kml/J1_VIIRS_C2_Europe_24h.kml",
