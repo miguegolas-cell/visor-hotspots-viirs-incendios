@@ -2,6 +2,9 @@ name: Actualizar hotspots VIIRS
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "15 5 * * *"
+    - cron: "15 14 * * *"
 
 permissions:
   contents: write
