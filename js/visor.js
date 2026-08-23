@@ -32,6 +32,8 @@ const PENDIENTE_LEYENDA = "datos/pendiente/pendiente_leyenda.json";
 const NDMI_IMAGE = "datos/ndmi/ultimo_ndmi.png";
 const NDMI_BOUNDS = "datos/ndmi/ndmi_bounds.json";
 const NDMI_LEYENDA = "datos/ndmi/ndmi_leyenda.json";
+const WORKER_ACTUALIZAR_HOTSPOTS = "https://metvlc-hotspots-update.miguegolas.workers.dev/";
+
 
 
 // ===============================
@@ -916,6 +918,103 @@ function activarControlesOpacidad() {
 }
 
 
+
+// ===============================
+// ACTUALIZACIÓN MANUAL DESDE EL VISOR
+// ===============================
+
+const actualizarHotspotsControl = L.control({
+  position: "topleft"
+});
+
+actualizarHotspotsControl.onAdd = function () {
+  const div = L.DomUtil.create("div", "legend update-box");
+
+  div.innerHTML = `
+    <div class="legend-title">Actualizar datos</div>
+    <button id="btnActualizarHotspots" class="update-btn">
+      Actualizar puntos calientes ahora
+    </button>
+    <div id="estadoActualizarHotspots" class="measure-small">
+      Lanza la actualización desde GitHub Actions.
+    </div>
+  `;
+
+  L.DomEvent.disableClickPropagation(div);
+  L.DomEvent.disableScrollPropagation(div);
+
+  return div;
+};
+
+actualizarHotspotsControl.addTo(map);
+
+function activarBotonActualizarHotspots() {
+  const btn = document.getElementById("btnActualizarHotspots");
+  const estado = document.getElementById("estadoActualizarHotspots");
+
+  if (!btn || !estado) {
+    return;
+  }
+
+  btn.addEventListener("click", async () => {
+    btn.disabled = true;
+    estado.textContent = "Solicitando actualización...";
+    setEstado("Solicitando actualización de puntos calientes...");
+
+    try {
+      const response = await fetch(WORKER_ACTUALIZAR_HOTSPOTS, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      let data = {};
+
+      try {
+        data = await response.json();
+      } catch (e) {
+        data = {};
+      }
+
+      if (!response.ok || !data.ok) {
+        estado.textContent =
+          data.mensaje ||
+          "No se pudo lanzar la actualización. Revisa GitHub Actions o el Worker.";
+
+        setEstado("No se pudo lanzar la actualización de puntos calientes.");
+
+        if (response.status !== 429) {
+          btn.disabled = false;
+        }
+
+        return;
+      }
+
+      estado.textContent =
+        data.mensaje ||
+        "Actualización lanzada. Espera unos minutos y recarga el visor.";
+
+      setEstado("Actualización lanzada. Espera unos minutos y recarga el visor.");
+
+      setTimeout(() => {
+        if (confirm("La actualización se ha lanzado. ¿Quieres recargar el visor ahora?")) {
+          window.location.reload();
+        } else {
+          btn.disabled = false;
+        }
+      }, 2500);
+
+    } catch (error) {
+      console.error(error);
+      estado.textContent = "Error de conexión con el servicio de actualización.";
+      setEstado("Error de conexión con el servicio de actualización.");
+      btn.disabled = false;
+    }
+  });
+}
+
+
 // ===============================
 // DESCARGAS DIRECTAS EN KML
 // ===============================
@@ -1482,6 +1581,7 @@ async function init() {
   await cargarLeyendasRasteres();
 
   activarControlesOpacidad();
+  activarBotonActualizarHotspots();
 
   cargarHotspots(activePeriod);
 
