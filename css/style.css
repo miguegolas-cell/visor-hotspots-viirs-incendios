@@ -388,3 +388,73 @@ body {
   background: #7d8c98;
   cursor: not-allowed;
 }
+
+
+/* =====================================================
+   Ajuste visual MetVlc:
+   cajas del visor con la misma anchura
+   ===================================================== */
+
+:root {
+  --metvlc-control-width: 285px;
+  --metvlc-control-width-mobile: 245px;
+}
+
+/* Todas las cajas informativas/control del visor */
+.leaflet-control.legend,
+.leaflet-control.opacity-control,
+.leaflet-control.measure-box,
+.leaflet-control.update-box,
+.legend,
+.opacity-control,
+.measure-box,
+.update-box,
+.raster-legend {
+  width: var(--metvlc-control-width) !important;
+  min-width: var(--metvlc-control-width) !important;
+  max-width: var(--metvlc-control-width) !important;
+}
+
+/* Botones interiores ocupando todo el ancho */
+.download-btn,
+.update-btn,
+.measure-box button,
+#descargarPerimetroKml,
+#descargarPerimetroGeojson {
+  width: 100%;
+}
+
+/* Filas de controles algo más limpias */
+.opacity-row {
+  grid-template-columns: 92px 1fr;
+}
+
+/* Evita que textos largos rompan la caja */
+.legend,
+.opacity-control,
+.measure-box,
+.update-box,
+.raster-legend {
+  overflow-wrap: anywhere;
+}
+
+/* En móvil, todas mantienen también la misma anchura */
+@media (max-width: 780px) {
+  :root {
+    --metvlc-control-width: var(--metvlc-control-width-mobile);
+  }
+
+  .leaflet-control.legend,
+  .leaflet-control.opacity-control,
+  .leaflet-control.measure-box,
+  .leaflet-control.update-box,
+  .legend,
+  .opacity-control,
+  .measure-box,
+  .update-box,
+  .raster-legend {
+    width: var(--metvlc-control-width-mobile) !important;
+    min-width: var(--metvlc-control-width-mobile) !important;
+    max-width: var(--metvlc-control-width-mobile) !important;
+  }
+}
