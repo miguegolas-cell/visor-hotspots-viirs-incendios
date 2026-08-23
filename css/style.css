@@ -361,3 +361,30 @@ body {
 .ndmi-text-item {
   align-items: flex-start;
 }
+
+
+/* Botón de actualización manual de puntos calientes */
+.update-box {
+  min-width: 230px;
+  max-width: 290px;
+}
+
+.update-btn {
+  width: 100%;
+  padding: 7px 11px;
+  border: none;
+  border-radius: 8px;
+  background: #0b4f75;
+  color: #ffffff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.update-btn:hover {
+  background: #083950;
+}
+
+.update-btn:disabled {
+  background: #7d8c98;
+  cursor: not-allowed;
+}
