@@ -5,20 +5,20 @@
       "type": "Feature",
       "properties": {
         "name": "VIIRS FIRE",
-        "description": "Latitude :       38.615 <br> Longitude :       -0.580<br>Date Acquired : 2026-08-25 <br>Time: 12:57 UTC<br>Confidence [0-100] : low<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
-        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "description": "Latitude :       40.023 <br> Longitude :       -0.657<br>Date Acquired : 2026-08-26 <br>Time: 13:14 UTC<br>Confidence [0-100] : nominal<br>Satellite : SNPP <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "metvlc_fuente": "NASA FIRMS · Suomi-NPP VIIRS C2",
         "metvlc_periodo_origen": "24h",
-        "metvlc_satellite": "NOAA-21",
+        "metvlc_satellite": "Suomi-NPP",
         "metvlc_instrument": "VIIRS",
         "metvlc_time_utc": null,
         "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_24h.kml"
+        "metvlc_origen_archivo": "SUOMI_VIIRS_C2_Europe_24h.kml"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -0.57988,
-          38.61481
+          -0.65673,
+          40.02275
         ]
       }
     },
@@ -26,20 +26,20 @@
       "type": "Feature",
       "properties": {
         "name": "VIIRS FIRE",
-        "description": "Latitude :       38.617 <br> Longitude :       -0.589<br>Date Acquired : 2026-08-25 <br>Time: 12:57 UTC<br>Confidence [0-100] : nominal<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
-        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "description": "Latitude :       39.367 <br> Longitude :       -0.319<br>Date Acquired : 2026-08-27 <br>Time: 12:55 UTC<br>Confidence [0-100] : low<br>Satellite : SNPP <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "metvlc_fuente": "NASA FIRMS · Suomi-NPP VIIRS C2",
         "metvlc_periodo_origen": "24h",
-        "metvlc_satellite": "NOAA-21",
+        "metvlc_satellite": "Suomi-NPP",
         "metvlc_instrument": "VIIRS",
         "metvlc_time_utc": null,
         "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_24h.kml"
+        "metvlc_origen_archivo": "SUOMI_VIIRS_C2_Europe_24h.kml"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -0.58944,
-          38.6167
+          -0.31917,
+          39.3667
         ]
       }
     },
@@ -47,20 +47,20 @@
       "type": "Feature",
       "properties": {
         "name": "VIIRS FIRE",
-        "description": "Latitude :       38.616 <br> Longitude :       -0.594<br>Date Acquired : 2026-08-25 <br>Time: 12:57 UTC<br>Confidence [0-100] : low<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
-        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "description": "Latitude :       39.366 <br> Longitude :       -0.324<br>Date Acquired : 2026-08-27 <br>Time: 12:55 UTC<br>Confidence [0-100] : low<br>Satellite : SNPP <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "metvlc_fuente": "NASA FIRMS · Suomi-NPP VIIRS C2",
         "metvlc_periodo_origen": "24h",
-        "metvlc_satellite": "NOAA-21",
+        "metvlc_satellite": "Suomi-NPP",
         "metvlc_instrument": "VIIRS",
         "metvlc_time_utc": null,
         "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_24h.kml"
+        "metvlc_origen_archivo": "SUOMI_VIIRS_C2_Europe_24h.kml"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -0.5938,
-          38.61601
+          -0.3241,
+          39.36579
         ]
       }
     },
@@ -68,20 +68,20 @@
       "type": "Feature",
       "properties": {
         "name": "VIIRS FIRE",
-        "description": "Latitude :       39.201 <br> Longitude :       -0.501<br>Date Acquired : 2026-08-25 <br>Time: 12:57 UTC<br>Confidence [0-100] : low<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
-        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "description": "Latitude :       38.378 <br> Longitude :       -0.545<br>Date Acquired : 2026-08-27 <br>Time: 01:54 UTC<br>Confidence [0-100] : nominal<br>Satellite : N20 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "metvlc_fuente": "NASA FIRMS · NOAA-20 VIIRS C2",
         "metvlc_periodo_origen": "24h",
-        "metvlc_satellite": "NOAA-21",
+        "metvlc_satellite": "NOAA-20",
         "metvlc_instrument": "VIIRS",
         "metvlc_time_utc": null,
         "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_24h.kml"
+        "metvlc_origen_archivo": "J1_VIIRS_C2_Europe_24h.kml"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -0.50121,
-          39.20134
+          -0.5448,
+          38.37837
         ]
       }
     },
@@ -89,20 +89,20 @@
       "type": "Feature",
       "properties": {
         "name": "VIIRS FIRE",
-        "description": "Latitude :       39.273 <br> Longitude :       -0.464<br>Date Acquired : 2026-08-25 <br>Time: 12:57 UTC<br>Confidence [0-100] : nominal<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
-        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "description": "Latitude :       39.366 <br> Longitude :       -0.323<br>Date Acquired : 2026-08-27 <br>Time: 13:16 UTC<br>Confidence [0-100] : nominal<br>Satellite : N20 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "metvlc_fuente": "NASA FIRMS · NOAA-20 VIIRS C2",
         "metvlc_periodo_origen": "24h",
-        "metvlc_satellite": "NOAA-21",
+        "metvlc_satellite": "NOAA-20",
         "metvlc_instrument": "VIIRS",
         "metvlc_time_utc": null,
         "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_24h.kml"
+        "metvlc_origen_archivo": "J1_VIIRS_C2_Europe_24h.kml"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -0.46371,
-          39.2725
+          -0.32316,
+          39.36592
         ]
       }
     },
@@ -110,7 +110,28 @@
       "type": "Feature",
       "properties": {
         "name": "VIIRS FIRE",
-        "description": "Latitude :       39.561 <br> Longitude :       -0.339<br>Date Acquired : 2026-08-25 <br>Time: 12:57 UTC<br>Confidence [0-100] : low<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "description": "Latitude :       39.369 <br> Longitude :       -0.324<br>Date Acquired : 2026-08-27 <br>Time: 13:16 UTC<br>Confidence [0-100] : low<br>Satellite : N20 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "metvlc_fuente": "NASA FIRMS · NOAA-20 VIIRS C2",
+        "metvlc_periodo_origen": "24h",
+        "metvlc_satellite": "NOAA-20",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": null,
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J1_VIIRS_C2_Europe_24h.kml"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.32388,
+          39.36941
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "VIIRS FIRE",
+        "description": "Latitude :       39.169 <br> Longitude :       -0.419<br>Date Acquired : 2026-08-26 <br>Time: 12:38 UTC<br>Confidence [0-100] : nominal<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
         "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
         "metvlc_periodo_origen": "24h",
         "metvlc_satellite": "NOAA-21",
@@ -122,8 +143,218 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -0.33901,
-          39.56136
+          -0.41869,
+          39.16939
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "VIIRS FIRE",
+        "description": "Latitude :       39.373 <br> Longitude :       -0.429<br>Date Acquired : 2026-08-26 <br>Time: 12:38 UTC<br>Confidence [0-100] : nominal<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "metvlc_periodo_origen": "24h",
+        "metvlc_satellite": "NOAA-21",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": null,
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_24h.kml"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.42878,
+          39.3734
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "VIIRS FIRE",
+        "description": "Latitude :       39.951 <br> Longitude :       -0.004<br>Date Acquired : 2026-08-27 <br>Time: 02:38 UTC<br>Confidence [0-100] : nominal<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "metvlc_periodo_origen": "24h",
+        "metvlc_satellite": "NOAA-21",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": null,
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_24h.kml"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.00357,
+          39.95103
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "VIIRS FIRE",
+        "description": "Latitude :       39.367 <br> Longitude :       -0.322<br>Date Acquired : 2026-08-27 <br>Time: 12:19 UTC<br>Confidence [0-100] : nominal<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "metvlc_periodo_origen": "24h",
+        "metvlc_satellite": "NOAA-21",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": null,
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_24h.kml"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.32191,
+          39.36683
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "VIIRS FIRE",
+        "description": "Latitude :       39.369 <br> Longitude :       -0.324<br>Date Acquired : 2026-08-27 <br>Time: 12:19 UTC<br>Confidence [0-100] : nominal<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "metvlc_periodo_origen": "24h",
+        "metvlc_satellite": "NOAA-21",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": null,
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_24h.kml"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.32358,
+          39.3694
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "VIIRS FIRE",
+        "description": "Latitude :       39.370 <br> Longitude :       -0.324<br>Date Acquired : 2026-08-27 <br>Time: 13:59 UTC<br>Confidence [0-100] : high<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "metvlc_periodo_origen": "24h",
+        "metvlc_satellite": "NOAA-21",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": null,
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_24h.kml"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.32411,
+          39.37035
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "VIIRS FIRE",
+        "description": "Latitude :       39.370 <br> Longitude :       -0.331<br>Date Acquired : 2026-08-27 <br>Time: 13:59 UTC<br>Confidence [0-100] : low<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "metvlc_periodo_origen": "24h",
+        "metvlc_satellite": "NOAA-21",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": null,
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_24h.kml"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.33138,
+          39.3702
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "VIIRS FIRE",
+        "description": "Latitude :       39.377 <br> Longitude :       -0.332<br>Date Acquired : 2026-08-27 <br>Time: 13:59 UTC<br>Confidence [0-100] : nominal<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "metvlc_periodo_origen": "24h",
+        "metvlc_satellite": "NOAA-21",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": null,
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_24h.kml"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.33159,
+          39.37679
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "VIIRS FIRE",
+        "description": "Latitude :       39.369 <br> Longitude :       -0.321<br>Date Acquired : 2026-08-27 <br>Time: 13:59 UTC<br>Confidence [0-100] : nominal<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "metvlc_periodo_origen": "24h",
+        "metvlc_satellite": "NOAA-21",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": null,
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_24h.kml"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.32095,
+          39.36876
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "VIIRS FIRE",
+        "description": "Latitude :       39.369 <br> Longitude :       -0.328<br>Date Acquired : 2026-08-27 <br>Time: 13:59 UTC<br>Confidence [0-100] : nominal<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "metvlc_periodo_origen": "24h",
+        "metvlc_satellite": "NOAA-21",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": null,
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_24h.kml"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.32823,
+          39.36864
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "VIIRS FIRE",
+        "description": "Latitude :       39.375 <br> Longitude :       -0.328<br>Date Acquired : 2026-08-27 <br>Time: 13:59 UTC<br>Confidence [0-100] : high<br>Satellite : N21 <br><br>For more information, visit <br><a href='https://earthdata.nasa.gov/data/nrt-data/firms'>https://earthdata.nasa.gov/data/nrt-data/firms</a> and <a href=\"https://earthdata.nasa.gov/faq/firms-faq\">https://earthdata.nasa.gov/faq/firms-faq </a><br><br>To subscribe to fire email alerts, visit <a href='https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts'>https://earthdata.nasa.gov/data/nrt-data/firms/email-alerts/</a> <br><br>&bull; <a href='https://earthdata.nasa.gov/data/nrt-data/disclaimer'>FIRMS Disclaimer</a><br><br>",
+        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "metvlc_periodo_origen": "24h",
+        "metvlc_satellite": "NOAA-21",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": null,
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_24h.kml"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.32847,
+          39.37524
         ]
       }
     }
