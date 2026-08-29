@@ -4,38 +4,6 @@
     {
       "type": "Feature",
       "properties": {
-        "LATITUDE": 40.02275,
-        "LONGITUDE": -0.65673,
-        "BRIGHT_TI4": 333.2,
-        "SCAN": 0.39,
-        "TRACK": 0.36,
-        "ACQ_DATE": "2026-08-26",
-        "ACQ_TIME": "1314",
-        "SATELLITE": "N",
-        "CONFIDENCE": "nominal",
-        "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 304.55,
-        "FRP": 2.11,
-        "DAYNIGHT": "D",
-        "metvlc_fuente": "NASA FIRMS · Suomi-NPP VIIRS C2",
-        "metvlc_periodo_origen": "7d",
-        "metvlc_satellite": "Suomi-NPP",
-        "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-08-26T13:14:00+00:00",
-        "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "SUOMI_VIIRS_C2_Europe_7d.zip"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -0.65673,
-          40.02275
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "LATITUDE": 39.3667,
         "LONGITUDE": -0.31917,
         "BRIGHT_TI4": 338.67,
@@ -254,70 +222,6 @@
         "coordinates": [
           -0.24903,
           39.66305
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "LATITUDE": 39.16939,
-        "LONGITUDE": -0.41869,
-        "BRIGHT_TI4": 335.67,
-        "SCAN": 0.5,
-        "TRACK": 0.41,
-        "ACQ_DATE": "2026-08-26",
-        "ACQ_TIME": "1238",
-        "SATELLITE": "N21",
-        "CONFIDENCE": "nominal",
-        "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 303.72,
-        "FRP": 4.97,
-        "DAYNIGHT": "D",
-        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
-        "metvlc_periodo_origen": "7d",
-        "metvlc_satellite": "NOAA-21",
-        "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-08-26T12:38:00+00:00",
-        "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_7d.zip"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -0.41869,
-          39.16939
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "LATITUDE": 39.3734,
-        "LONGITUDE": -0.42878,
-        "BRIGHT_TI4": 335.29,
-        "SCAN": 0.5,
-        "TRACK": 0.41,
-        "ACQ_DATE": "2026-08-26",
-        "ACQ_TIME": "1238",
-        "SATELLITE": "N21",
-        "CONFIDENCE": "nominal",
-        "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 303.59,
-        "FRP": 2.27,
-        "DAYNIGHT": "D",
-        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
-        "metvlc_periodo_origen": "7d",
-        "metvlc_satellite": "NOAA-21",
-        "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-08-26T12:38:00+00:00",
-        "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_7d.zip"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -0.42878,
-          39.3734
         ]
       }
     },
@@ -606,6 +510,38 @@
         "coordinates": [
           -0.32847,
           39.37524
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LATITUDE": 39.70549,
+        "LONGITUDE": -0.65725,
+        "BRIGHT_TI4": 342.69,
+        "SCAN": 0.56,
+        "TRACK": 0.43,
+        "ACQ_DATE": "2026-08-29",
+        "ACQ_TIME": "1323",
+        "SATELLITE": "N21",
+        "CONFIDENCE": "nominal",
+        "VERSION": "2.0NRT",
+        "BRIGHT_TI5": 310.72,
+        "FRP": 4.78,
+        "DAYNIGHT": "D",
+        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "metvlc_periodo_origen": "7d",
+        "metvlc_satellite": "NOAA-21",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": "2026-08-29T13:23:00+00:00",
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_7d.zip"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.65725,
+          39.70549
         ]
       }
     }
