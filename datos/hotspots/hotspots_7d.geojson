@@ -132,38 +132,6 @@
     {
       "type": "Feature",
       "properties": {
-        "LATITUDE": 38.37859,
-        "LONGITUDE": -0.54529,
-        "BRIGHT_TI4": 306.09,
-        "SCAN": 0.48,
-        "TRACK": 0.48,
-        "ACQ_DATE": "2026-08-23",
-        "ACQ_TIME": "0128",
-        "SATELLITE": "N20",
-        "CONFIDENCE": "nominal",
-        "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 294.39,
-        "FRP": 0.99,
-        "DAYNIGHT": "N",
-        "metvlc_fuente": "NASA FIRMS · NOAA-20 VIIRS C2",
-        "metvlc_periodo_origen": "7d",
-        "metvlc_satellite": "NOAA-20",
-        "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-08-23T01:28:00+00:00",
-        "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J1_VIIRS_C2_Europe_7d.zip"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -0.54529,
-          38.37859
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "LATITUDE": 38.37837,
         "LONGITUDE": -0.5448,
         "BRIGHT_TI4": 305.38,
@@ -286,38 +254,6 @@
         "coordinates": [
           -0.24903,
           39.66305
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "LATITUDE": 38.3773,
-        "LONGITUDE": -0.54271,
-        "BRIGHT_TI4": 307.26,
-        "SCAN": 0.49,
-        "TRACK": 0.4,
-        "ACQ_DATE": "2026-08-23",
-        "ACQ_TIME": "0213",
-        "SATELLITE": "N21",
-        "CONFIDENCE": "nominal",
-        "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 294.6,
-        "FRP": 1.21,
-        "DAYNIGHT": "N",
-        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
-        "metvlc_periodo_origen": "7d",
-        "metvlc_satellite": "NOAA-21",
-        "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-08-23T02:13:00+00:00",
-        "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_7d.zip"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -0.54271,
-          38.3773
         ]
       }
     },
