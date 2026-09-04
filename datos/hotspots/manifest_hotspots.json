@@ -7,7 +7,7 @@
     "NOAA-21"
   ],
   "instrument": "VIIRS",
-  "actualizado_utc": "2026-09-04T09:36:50+00:00",
+  "actualizado_utc": "2026-09-04T17:34:49+00:00",
   "limite_usado": "datos/limites/comunitat_valenciana.geojson",
   "bbox_cv": {
     "lon_min": -1.6,
