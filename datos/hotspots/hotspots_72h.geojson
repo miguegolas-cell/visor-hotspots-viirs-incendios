@@ -4,32 +4,32 @@
     {
       "type": "Feature",
       "properties": {
-        "LATITUDE": 38.37811,
-        "LONGITUDE": -0.54507,
-        "BRIGHT_TI4": 300.94,
-        "SCAN": 0.53,
-        "TRACK": 0.5,
-        "ACQ_DATE": "2026-10-05",
-        "ACQ_TIME": "0243",
+        "LATITUDE": 39.20671,
+        "LONGITUDE": -0.25904,
+        "BRIGHT_TI4": 331.9,
+        "SCAN": 0.38,
+        "TRACK": 0.36,
+        "ACQ_DATE": "2026-10-08",
+        "ACQ_TIME": "1310",
         "SATELLITE": "N",
         "CONFIDENCE": "nominal",
         "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 286.08,
-        "FRP": 1.3,
-        "DAYNIGHT": "N",
+        "BRIGHT_TI5": 294.97,
+        "FRP": 2.06,
+        "DAYNIGHT": "D",
         "metvlc_fuente": "NASA FIRMS · Suomi-NPP VIIRS C2",
         "metvlc_periodo_origen": "7d",
         "metvlc_satellite": "Suomi-NPP",
         "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-10-05T02:43:00+00:00",
+        "metvlc_time_utc": "2026-10-08T13:10:00+00:00",
         "metvlc_ambito": "Comunitat Valenciana",
         "metvlc_origen_archivo": "SUOMI_VIIRS_C2_Europe_7d.zip"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -0.54507,
-          38.37811
+          -0.25904,
+          39.20671
         ]
       }
     },
@@ -68,6 +68,70 @@
     {
       "type": "Feature",
       "properties": {
+        "LATITUDE": 39.95236,
+        "LONGITUDE": -0.00464,
+        "BRIGHT_TI4": 302.73,
+        "SCAN": 0.39,
+        "TRACK": 0.36,
+        "ACQ_DATE": "2026-10-08",
+        "ACQ_TIME": "0206",
+        "SATELLITE": "N20",
+        "CONFIDENCE": "nominal",
+        "VERSION": "2.0NRT",
+        "BRIGHT_TI5": 290.88,
+        "FRP": 0.93,
+        "DAYNIGHT": "N",
+        "metvlc_fuente": "NASA FIRMS · NOAA-20 VIIRS C2",
+        "metvlc_periodo_origen": "7d",
+        "metvlc_satellite": "NOAA-20",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": "2026-10-08T02:06:00+00:00",
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J1_VIIRS_C2_Europe_7d.zip"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.00464,
+          39.95236
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LATITUDE": 39.66436,
+        "LONGITUDE": -0.24598,
+        "BRIGHT_TI4": 302.94,
+        "SCAN": 0.39,
+        "TRACK": 0.36,
+        "ACQ_DATE": "2026-10-08",
+        "ACQ_TIME": "0206",
+        "SATELLITE": "N20",
+        "CONFIDENCE": "nominal",
+        "VERSION": "2.0NRT",
+        "BRIGHT_TI5": 289.75,
+        "FRP": 0.31,
+        "DAYNIGHT": "N",
+        "metvlc_fuente": "NASA FIRMS · NOAA-20 VIIRS C2",
+        "metvlc_periodo_origen": "7d",
+        "metvlc_satellite": "NOAA-20",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": "2026-10-08T02:06:00+00:00",
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J1_VIIRS_C2_Europe_7d.zip"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.24598,
+          39.66436
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "LATITUDE": 39.8651,
         "LONGITUDE": -0.10213,
         "BRIGHT_TI4": 327.82,
@@ -94,6 +158,38 @@
         "coordinates": [
           -0.10213,
           39.8651
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LATITUDE": 39.66193,
+        "LONGITUDE": -0.24895,
+        "BRIGHT_TI4": 301.17,
+        "SCAN": 0.35,
+        "TRACK": 0.57,
+        "ACQ_DATE": "2026-10-08",
+        "ACQ_TIME": "0109",
+        "SATELLITE": "N21",
+        "CONFIDENCE": "nominal",
+        "VERSION": "2.0NRT",
+        "BRIGHT_TI5": 288.85,
+        "FRP": 1.06,
+        "DAYNIGHT": "N",
+        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "metvlc_periodo_origen": "7d",
+        "metvlc_satellite": "NOAA-21",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": "2026-10-08T01:09:00+00:00",
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_7d.zip"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.24895,
+          39.66193
         ]
       }
     }
