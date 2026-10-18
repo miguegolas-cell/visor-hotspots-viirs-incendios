@@ -4,38 +4,6 @@
     {
       "type": "Feature",
       "properties": {
-        "LATITUDE": 38.37803,
-        "LONGITUDE": -0.54236,
-        "BRIGHT_TI4": 302.14,
-        "SCAN": 0.38,
-        "TRACK": 0.59,
-        "ACQ_DATE": "2026-10-15",
-        "ACQ_TIME": "0256",
-        "SATELLITE": "N",
-        "CONFIDENCE": "nominal",
-        "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 286.95,
-        "FRP": 0.59,
-        "DAYNIGHT": "N",
-        "metvlc_fuente": "NASA FIRMS · Suomi-NPP VIIRS C2",
-        "metvlc_periodo_origen": "7d",
-        "metvlc_satellite": "Suomi-NPP",
-        "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-10-15T02:56:00+00:00",
-        "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "SUOMI_VIIRS_C2_Europe_7d.zip"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -0.54236,
-          38.37803
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "LATITUDE": 39.11293,
         "LONGITUDE": -0.25623,
         "BRIGHT_TI4": 333.3,
@@ -100,70 +68,6 @@
     {
       "type": "Feature",
       "properties": {
-        "LATITUDE": 39.66636,
-        "LONGITUDE": -0.24938,
-        "BRIGHT_TI4": 299.5,
-        "SCAN": 0.4,
-        "TRACK": 0.44,
-        "ACQ_DATE": "2026-10-15",
-        "ACQ_TIME": "0137",
-        "SATELLITE": "N20",
-        "CONFIDENCE": "nominal",
-        "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 287.99,
-        "FRP": 0.3,
-        "DAYNIGHT": "N",
-        "metvlc_fuente": "NASA FIRMS · NOAA-20 VIIRS C2",
-        "metvlc_periodo_origen": "7d",
-        "metvlc_satellite": "NOAA-20",
-        "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-10-15T01:37:00+00:00",
-        "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J1_VIIRS_C2_Europe_7d.zip"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -0.24938,
-          39.66636
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "LATITUDE": 38.37812,
-        "LONGITUDE": -0.54694,
-        "BRIGHT_TI4": 300.09,
-        "SCAN": 0.4,
-        "TRACK": 0.44,
-        "ACQ_DATE": "2026-10-15",
-        "ACQ_TIME": "0137",
-        "SATELLITE": "N20",
-        "CONFIDENCE": "nominal",
-        "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 287.64,
-        "FRP": 0.34,
-        "DAYNIGHT": "N",
-        "metvlc_fuente": "NASA FIRMS · NOAA-20 VIIRS C2",
-        "metvlc_periodo_origen": "7d",
-        "metvlc_satellite": "NOAA-20",
-        "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-10-15T01:37:00+00:00",
-        "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J1_VIIRS_C2_Europe_7d.zip"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -0.54694,
-          38.37812
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "LATITUDE": 39.12149,
         "LONGITUDE": -0.264,
         "BRIGHT_TI4": 336.53,
@@ -222,38 +126,6 @@
         "coordinates": [
           -0.5472,
           38.37598
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "LATITUDE": 38.37618,
-        "LONGITUDE": -0.54317,
-        "BRIGHT_TI4": 306.93,
-        "SCAN": 0.39,
-        "TRACK": 0.44,
-        "ACQ_DATE": "2026-10-15",
-        "ACQ_TIME": "0219",
-        "SATELLITE": "N21",
-        "CONFIDENCE": "nominal",
-        "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 288.93,
-        "FRP": 1.19,
-        "DAYNIGHT": "N",
-        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
-        "metvlc_periodo_origen": "7d",
-        "metvlc_satellite": "NOAA-21",
-        "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-10-15T02:19:00+00:00",
-        "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_7d.zip"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -0.54317,
-          38.37618
         ]
       }
     },
