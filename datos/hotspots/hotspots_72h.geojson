@@ -4,38 +4,6 @@
     {
       "type": "Feature",
       "properties": {
-        "LATITUDE": 39.11293,
-        "LONGITUDE": -0.25623,
-        "BRIGHT_TI4": 333.3,
-        "SCAN": 0.4,
-        "TRACK": 0.6,
-        "ACQ_DATE": "2026-10-16",
-        "ACQ_TIME": "1359",
-        "SATELLITE": "N",
-        "CONFIDENCE": "nominal",
-        "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 290.19,
-        "FRP": 3.88,
-        "DAYNIGHT": "D",
-        "metvlc_fuente": "NASA FIRMS · Suomi-NPP VIIRS C2",
-        "metvlc_periodo_origen": "7d",
-        "metvlc_satellite": "Suomi-NPP",
-        "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-10-16T13:59:00+00:00",
-        "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "SUOMI_VIIRS_C2_Europe_7d.zip"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -0.25623,
-          39.11293
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "LATITUDE": 38.37664,
         "LONGITUDE": -0.54308,
         "BRIGHT_TI4": 306.87,
@@ -68,38 +36,6 @@
     {
       "type": "Feature",
       "properties": {
-        "LATITUDE": 39.12149,
-        "LONGITUDE": -0.264,
-        "BRIGHT_TI4": 336.53,
-        "SCAN": 0.38,
-        "TRACK": 0.44,
-        "ACQ_DATE": "2026-10-16",
-        "ACQ_TIME": "1238",
-        "SATELLITE": "N20",
-        "CONFIDENCE": "nominal",
-        "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 295.83,
-        "FRP": 3.85,
-        "DAYNIGHT": "D",
-        "metvlc_fuente": "NASA FIRMS · NOAA-20 VIIRS C2",
-        "metvlc_periodo_origen": "7d",
-        "metvlc_satellite": "NOAA-20",
-        "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-10-16T12:38:00+00:00",
-        "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J1_VIIRS_C2_Europe_7d.zip"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -0.264,
-          39.12149
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "LATITUDE": 38.37598,
         "LONGITUDE": -0.5472,
         "BRIGHT_TI4": 302.88,
@@ -126,70 +62,6 @@
         "coordinates": [
           -0.5472,
           38.37598
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "LATITUDE": 39.11444,
-        "LONGITUDE": -0.25344,
-        "BRIGHT_TI4": 326.21,
-        "SCAN": 0.39,
-        "TRACK": 0.44,
-        "ACQ_DATE": "2026-10-16",
-        "ACQ_TIME": "1323",
-        "SATELLITE": "N21",
-        "CONFIDENCE": "nominal",
-        "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 292.71,
-        "FRP": 2.83,
-        "DAYNIGHT": "D",
-        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
-        "metvlc_periodo_origen": "7d",
-        "metvlc_satellite": "NOAA-21",
-        "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-10-16T13:23:00+00:00",
-        "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_7d.zip"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -0.25344,
-          39.11444
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "LATITUDE": 39.12202,
-        "LONGITUDE": -0.25925,
-        "BRIGHT_TI4": 330.04,
-        "SCAN": 0.39,
-        "TRACK": 0.44,
-        "ACQ_DATE": "2026-10-16",
-        "ACQ_TIME": "1323",
-        "SATELLITE": "N21",
-        "CONFIDENCE": "nominal",
-        "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 293.56,
-        "FRP": 2.76,
-        "DAYNIGHT": "D",
-        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
-        "metvlc_periodo_origen": "7d",
-        "metvlc_satellite": "NOAA-21",
-        "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-10-16T13:23:00+00:00",
-        "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_7d.zip"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -0.25925,
-          39.12202
         ]
       }
     },
