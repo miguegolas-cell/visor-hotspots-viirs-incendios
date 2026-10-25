@@ -4,38 +4,6 @@
     {
       "type": "Feature",
       "properties": {
-        "LATITUDE": 38.3777,
-        "LONGITUDE": -0.5436,
-        "BRIGHT_TI4": 306.43,
-        "SCAN": 0.47,
-        "TRACK": 0.4,
-        "ACQ_DATE": "2026-10-22",
-        "ACQ_TIME": "0226",
-        "SATELLITE": "N",
-        "CONFIDENCE": "nominal",
-        "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 286.9,
-        "FRP": 1.22,
-        "DAYNIGHT": "N",
-        "metvlc_fuente": "NASA FIRMS · Suomi-NPP VIIRS C2",
-        "metvlc_periodo_origen": "7d",
-        "metvlc_satellite": "Suomi-NPP",
-        "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-10-22T02:26:00+00:00",
-        "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "SUOMI_VIIRS_C2_Europe_7d.zip"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -0.5436,
-          38.3777
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "LATITUDE": 38.37657,
         "LONGITUDE": -0.54557,
         "BRIGHT_TI4": 307.19,
@@ -68,32 +36,64 @@
     {
       "type": "Feature",
       "properties": {
-        "LATITUDE": 38.3756,
-        "LONGITUDE": -0.54524,
-        "BRIGHT_TI4": 309.65,
-        "SCAN": 0.33,
-        "TRACK": 0.55,
-        "ACQ_DATE": "2026-10-22",
-        "ACQ_TIME": "0243",
-        "SATELLITE": "N20",
+        "LATITUDE": 38.36895,
+        "LONGITUDE": -0.54187,
+        "BRIGHT_TI4": 295.19,
+        "SCAN": 0.61,
+        "TRACK": 0.53,
+        "ACQ_DATE": "2026-10-25",
+        "ACQ_TIME": "0128",
+        "SATELLITE": "N",
         "CONFIDENCE": "nominal",
         "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 286.14,
-        "FRP": 0.97,
+        "BRIGHT_TI5": 283.93,
+        "FRP": 0.57,
         "DAYNIGHT": "N",
-        "metvlc_fuente": "NASA FIRMS · NOAA-20 VIIRS C2",
+        "metvlc_fuente": "NASA FIRMS · Suomi-NPP VIIRS C2",
         "metvlc_periodo_origen": "7d",
-        "metvlc_satellite": "NOAA-20",
+        "metvlc_satellite": "Suomi-NPP",
         "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-10-22T02:43:00+00:00",
+        "metvlc_time_utc": "2026-10-25T01:28:00+00:00",
         "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J1_VIIRS_C2_Europe_7d.zip"
+        "metvlc_origen_archivo": "SUOMI_VIIRS_C2_Europe_7d.zip"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -0.54524,
-          38.3756
+          -0.54187,
+          38.36895
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LATITUDE": 38.37482,
+        "LONGITUDE": -0.54537,
+        "BRIGHT_TI4": 298.82,
+        "SCAN": 0.54,
+        "TRACK": 0.68,
+        "ACQ_DATE": "2026-10-25",
+        "ACQ_TIME": "0308",
+        "SATELLITE": "N",
+        "CONFIDENCE": "nominal",
+        "VERSION": "2.0NRT",
+        "BRIGHT_TI5": 283.48,
+        "FRP": 1.04,
+        "DAYNIGHT": "N",
+        "metvlc_fuente": "NASA FIRMS · Suomi-NPP VIIRS C2",
+        "metvlc_periodo_origen": "7d",
+        "metvlc_satellite": "Suomi-NPP",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": "2026-10-25T03:08:00+00:00",
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "SUOMI_VIIRS_C2_Europe_7d.zip"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.54537,
+          38.37482
         ]
       }
     },
@@ -164,32 +164,32 @@
     {
       "type": "Feature",
       "properties": {
-        "LATITUDE": 38.3767,
-        "LONGITUDE": -0.54373,
-        "BRIGHT_TI4": 309.99,
-        "SCAN": 0.4,
-        "TRACK": 0.37,
-        "ACQ_DATE": "2026-10-22",
+        "LATITUDE": 38.37433,
+        "LONGITUDE": -0.54432,
+        "BRIGHT_TI4": 303.28,
+        "SCAN": 0.44,
+        "TRACK": 0.38,
+        "ACQ_DATE": "2026-10-25",
         "ACQ_TIME": "0147",
-        "SATELLITE": "N21",
+        "SATELLITE": "N20",
         "CONFIDENCE": "nominal",
         "VERSION": "2.0NRT",
-        "BRIGHT_TI5": 288.18,
-        "FRP": 1.58,
+        "BRIGHT_TI5": 283.82,
+        "FRP": 0.72,
         "DAYNIGHT": "N",
-        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "metvlc_fuente": "NASA FIRMS · NOAA-20 VIIRS C2",
         "metvlc_periodo_origen": "7d",
-        "metvlc_satellite": "NOAA-21",
+        "metvlc_satellite": "NOAA-20",
         "metvlc_instrument": "VIIRS",
-        "metvlc_time_utc": "2026-10-22T01:47:00+00:00",
+        "metvlc_time_utc": "2026-10-25T01:47:00+00:00",
         "metvlc_ambito": "Comunitat Valenciana",
-        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_7d.zip"
+        "metvlc_origen_archivo": "J1_VIIRS_C2_Europe_7d.zip"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -0.54373,
-          38.3767
+          -0.54432,
+          38.37433
         ]
       }
     },

@@ -7,7 +7,7 @@
     "NOAA-21"
   ],
   "instrument": "VIIRS",
-  "actualizado_utc": "2026-10-24T17:24:41+00:00",
+  "actualizado_utc": "2026-10-25T09:47:03+00:00",
   "limite_usado": "datos/limites/comunitat_valenciana.geojson",
   "bbox_cv": {
     "lon_min": -1.6,
@@ -15,8 +15,8 @@
     "lon_max": 0.8,
     "lat_max": 40.9
   },
-  "hotspots_24h": 16,
-  "hotspots_48h": 20,
+  "hotspots_24h": 9,
+  "hotspots_48h": 19,
   "hotspots_72h": 20,
   "hotspots_7d": 26,
   "fuentes_24h": [
