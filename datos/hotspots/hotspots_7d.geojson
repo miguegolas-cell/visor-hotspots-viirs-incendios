@@ -832,6 +832,38 @@
           38.37697
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LATITUDE": 39.23978,
+        "LONGITUDE": -0.47137,
+        "BRIGHT_TI4": 327.28,
+        "SCAN": 0.5,
+        "TRACK": 0.66,
+        "ACQ_DATE": "2026-10-25",
+        "ACQ_TIME": "1353",
+        "SATELLITE": "N21",
+        "CONFIDENCE": "nominal",
+        "VERSION": "2.0NRT",
+        "BRIGHT_TI5": 296.33,
+        "FRP": 3.26,
+        "DAYNIGHT": "D",
+        "metvlc_fuente": "NASA FIRMS · NOAA-21 VIIRS C2",
+        "metvlc_periodo_origen": "7d",
+        "metvlc_satellite": "NOAA-21",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": "2026-10-25T13:53:00+00:00",
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J2_VIIRS_C2_Europe_7d.zip"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.47137,
+          39.23978
+        ]
+      }
     }
   ]
 }
