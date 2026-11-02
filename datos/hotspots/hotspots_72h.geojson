@@ -132,6 +132,38 @@
     {
       "type": "Feature",
       "properties": {
+        "LATITUDE": 39.95126,
+        "LONGITUDE": -0.00444,
+        "BRIGHT_TI4": 299.69,
+        "SCAN": 0.41,
+        "TRACK": 0.37,
+        "ACQ_DATE": "2026-11-02",
+        "ACQ_TIME": "0217",
+        "SATELLITE": "N",
+        "CONFIDENCE": "nominal",
+        "VERSION": "2.0NRT",
+        "BRIGHT_TI5": 287.38,
+        "FRP": 1.33,
+        "DAYNIGHT": "N",
+        "metvlc_fuente": "NASA FIRMS · Suomi-NPP VIIRS C2",
+        "metvlc_periodo_origen": "7d",
+        "metvlc_satellite": "Suomi-NPP",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": "2026-11-02T02:17:00+00:00",
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "SUOMI_VIIRS_C2_Europe_7d.zip"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.00444,
+          39.95126
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "LATITUDE": 38.37692,
         "LONGITUDE": -0.54383,
         "BRIGHT_TI4": 300.66,
@@ -318,6 +350,38 @@
         "coordinates": [
           -0.54394,
           38.37867
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LATITUDE": 39.95279,
+        "LONGITUDE": -0.01104,
+        "BRIGHT_TI4": 296.2,
+        "SCAN": 0.63,
+        "TRACK": 0.72,
+        "ACQ_DATE": "2026-11-02",
+        "ACQ_TIME": "0058",
+        "SATELLITE": "N20",
+        "CONFIDENCE": "nominal",
+        "VERSION": "2.0NRT",
+        "BRIGHT_TI5": 285.72,
+        "FRP": 1.25,
+        "DAYNIGHT": "N",
+        "metvlc_fuente": "NASA FIRMS · NOAA-20 VIIRS C2",
+        "metvlc_periodo_origen": "7d",
+        "metvlc_satellite": "NOAA-20",
+        "metvlc_instrument": "VIIRS",
+        "metvlc_time_utc": "2026-11-02T00:58:00+00:00",
+        "metvlc_ambito": "Comunitat Valenciana",
+        "metvlc_origen_archivo": "J1_VIIRS_C2_Europe_7d.zip"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.01104,
+          39.95279
         ]
       }
     },
